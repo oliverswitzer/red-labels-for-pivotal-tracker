@@ -1,7 +1,5 @@
-chrome.extension.sendMessage({}, function(){
-    document.onreadystatechange = function() {
-        if (document.readyState === "complete") {
-            storyListener(document);
-        }
-    }
+chrome.extension.sendMessage({}, function() {
+    setTimeout(function() {
+        storyListener(document);
+    }, 2000);
 });

@@ -1,5 +1,5 @@
 var storyListener = function (dom) {
-    var finishButtons = dom.querySelectorAll('.button');
+    var finishButtons = dom.querySelectorAll('.button.finish');
 
     finishButtons.forEach(function(button) {
         button.addEventListener("click", function() {

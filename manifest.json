@@ -18,11 +18,10 @@
         "https://www.pivotaltracker.com/*"
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/inject/chrome_adapter.js",
+        "src/inject/story_listener.js"
       ],
-      "css": [
-        "css/inject/inject.css"
-      ]
+      "css": []
     }
   ]
 }
