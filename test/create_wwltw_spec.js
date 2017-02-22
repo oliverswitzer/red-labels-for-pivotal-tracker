@@ -22,6 +22,10 @@ describe('user can create what we learned this week from prompt', function () {
         it('shows a prompt when the finish button is clicked', function () {
             whenIClickTheStateButtonOn(startedStory);
             thenISeeAPromptForWhatILearned();
+
+            whenIClickTheStateButtonOn(startedStory);
+            window.prompt.calls.reset();
+            thenIDoNotSeeAPromptForWhatILearned();
         });
     });
 
