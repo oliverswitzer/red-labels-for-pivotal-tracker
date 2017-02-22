@@ -1,0 +1,29 @@
+{
+  "name": "wwltw-for-pivotal-tracker",
+  "version": "1.0.0",
+  "description": "This plugin helps users keep track of what they learned while working on stories in the backlog. It prompts the user for optional feedback on what they learned for every story they complete.",
+  "main": "karma.conf.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliverswitzer/wwltw-for-pivotal-tracker.git"
+  },
+  "author": "Oliver Switzer, Sai To Yeung, Shawna Mattison",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oliverswitzer/wwltw-for-pivotal-tracker/issues"
+  },
+  "homepage": "https://github.com/oliverswitzer/wwltw-for-pivotal-tracker#readme",
+  "devDependencies": {
+    "karma": "^1.5.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-html2js-preprocessor": "^1.1.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-jquery": "^0.1.1"
+  }
+}
