@@ -8,8 +8,10 @@
   "icons": {},
   "permissions": [
     "http://www.pivotaltracker.com/*",
-    "https://www.pivotaltracker.com/*"
+    "https://www.pivotaltracker.com/*",
+    "storage"
   ],
+  "options_page": "src/options.html",
   "short_name": "WWLTW",
   "content_scripts": [
     {
