@@ -25,7 +25,7 @@ class WWLTWRepository {
                 "Content-Type": "application/json"
             }),
             body: JSON.stringify({
-                "description": story.description + '\n' + submission
+                "description": (story.description || '') + '\n' + submission
             })
         });
     }
