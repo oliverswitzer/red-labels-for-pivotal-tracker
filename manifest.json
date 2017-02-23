@@ -22,9 +22,12 @@
       "js": [
         "src/inject/chrome_adapter.js",
         "src/inject/story_listener.js",
-        "src/wwltw_repository.js"
+        "src/wwltw_repository.js",
+        "node_modules/vanilla-modal/dist/index.js"
       ],
-      "css": []
+      "css": [
+        "css/inject/inject.css"
+      ]
     }
   ]
 }
