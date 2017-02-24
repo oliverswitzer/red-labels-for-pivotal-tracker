@@ -10,8 +10,8 @@ class WWLTWModal {
 
         let modalContent = `
         <div id='wwltw-modal'>
-            <h3>What did you learn while working on this story?</h3>
             <form id="wwltw-form" class="ui form">
+                <label id="header">What did you learn while working on this story?</label>
                 <div class="field">
                     <label for="learning-body">Body (markdown supported)</label>
                     <textarea name="learning-body" id="learning-body" cols="30" rows="5"></textarea>
@@ -23,7 +23,7 @@ class WWLTWModal {
                       ${this.populateTags()}
                     </select>
                 </div>
-                <input type="submit" value="Add to WWLTW story" onclick="">
+                <input type="submit" value="Add to WWLTW story" class="ui submit button">
             </form>
         </div>`;
 

@@ -30,11 +30,15 @@
         "vendor/semantic-ui/semantic.min.js"
       ],
       "css": [
-        "css/inject/inject.css",
+        "vendor/semantic-ui/site.min.css",
+        "vendor/semantic-ui/label.min.css",
+        "vendor/semantic-ui/icon.min.css",
         "vendor/semantic-ui/dropdown.min.css",
         "vendor/semantic-ui/transition.min.css",
         "vendor/semantic-ui/input.min.css",
-        "vendor/semantic-ui/form.min.css"
+        "vendor/semantic-ui/button.min.css",
+        "vendor/semantic-ui/form.min.css",
+        "css/inject/inject.css"
       ]
     }
   ]
