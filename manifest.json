@@ -28,8 +28,7 @@
         "node_modules/vanilla-modal/dist/index.js",
         "vendor/jquery/jquery-3.1.1.min.js",
         "vendor/semantic-ui/dropdown.min.js",
-        "vendor/semantic-ui/transition.min.js",
-        "src/inject/chrome_adapter.js"
+        "vendor/semantic-ui/transition.min.js"
       ],
       "css": [
         "vendor/semantic-ui/site.min.css",
