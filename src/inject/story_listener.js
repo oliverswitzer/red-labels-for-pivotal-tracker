@@ -6,25 +6,27 @@ var storyListener = function (dom, modal) {
         bindListenForSubmissionOfWWLTWForm(wwltwRepository, modal);
     });
 
-    let getProjectId = function () {
-        return /projects\/(\d*)/.exec(window.location)[1];
-    };
-
     function bindListenForSubmissionOfWWLTWForm(wwltwRepository, modal) {
         let wwltwForm = dom.querySelector("#wwltw-form");
+
         wwltwForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            let learningBody = e.target.querySelector("#learning-body");
+            let learningBody = wwltwForm.querySelector("#learning-body");
+            let tags = extractSubmittedTags(wwltwForm);
 
-            wwltwRepository.add(getProjectId(), learningBody.value);
+            wwltwRepository.add(getProjectId(), learningBody.value, tags);
 
             learningBody.value = "";
             modal.close();
         });
     }
 
-    function bindListenersToFinishButtons(modal) {
-        let finishButtons = dom.querySelectorAll('.button.finish');
+    const getProjectId = function () {
+        return /projects\/(\d*)/.exec(window.location)[1];
+    };
+
+    const bindListenersToFinishButtons = function (modal) {
+        const finishButtons = dom.querySelectorAll('.button.finish');
 
         finishButtons.forEach(function (button) {
             button.addEventListener('click', promptListener, false);
@@ -34,7 +36,17 @@ var storyListener = function (dom, modal) {
                 button.removeEventListener('click', promptListener, false);
             }
         });
-    }
+    };
+
+    const extractSubmittedTags = function (wwltwForm) {
+        const learningTags = wwltwForm.querySelector("#learning-tags");
+        const tags = $(learningTags).find('option:selected')
+            .map(function (i, option) {
+                return option.value;
+            });
+
+        return Array.prototype.join.call(tags, ', ');
+    };
 
 
 };

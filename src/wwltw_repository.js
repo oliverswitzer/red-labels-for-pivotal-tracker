@@ -4,7 +4,7 @@ class WWLTWRepository {
         this.TRACKER_BASE_URL = "https://www.pivotaltracker.com";
     }
 
-    add(projectId, submission) {
+    add(projectId, learningBody, learningTags) {
         this.findExistingWWLTWStory(projectId)
             .then(function(response) {
                 return response.json();
@@ -13,11 +13,11 @@ class WWLTWRepository {
                 return responseJson[0];
             })
             .then(function(story) {
-                return this.updateWWLTWStory(story, submission, projectId);
+                return this.updateWWLTWStory(story, learningBody, learningTags, projectId);
             }.bind(this))
     }
 
-    updateWWLTWStory(story, submission, projectId) {
+    updateWWLTWStory(story, learningBody, learningTags, projectId) {
         return fetch(this.generateApiUrlBase(projectId) + "/stories/" + story.id, {
             method: 'PUT',
             headers: new Headers({
@@ -25,9 +25,16 @@ class WWLTWRepository {
                 "Content-Type": "application/json"
             }),
             body: JSON.stringify({
-                "description": (story.description || '') + '\n' + submission
+                "description": this.updateDescription(story, learningBody, learningTags)
             })
         });
+    }
+
+    updateDescription(story, learningBody, learningTags) {
+        return `${(story.description || '')}\n
+                ${learningBody}
+                _Tags: ${learningTags}_\n\n
+                ---`;
     }
 
     findExistingWWLTWStory(projectId) {
