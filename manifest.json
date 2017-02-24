@@ -27,13 +27,14 @@
         "src/wwltw_repository.js",
         "node_modules/vanilla-modal/dist/index.js",
         "vendor/jquery/jquery-3.1.1.min.js",
-        "vendor/semantic-ui/dropdown.min.js",
-        "vendor/semantic-ui/transition.min.js"
+        "vendor/semantic-ui/semantic.min.js"
       ],
       "css": [
         "css/inject/inject.css",
         "vendor/semantic-ui/dropdown.min.css",
-        "vendor/semantic-ui/transition.min.css"
+        "vendor/semantic-ui/transition.min.css",
+        "vendor/semantic-ui/input.min.css",
+        "vendor/semantic-ui/form.min.css"
       ]
     }
   ]
