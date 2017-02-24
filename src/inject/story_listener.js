@@ -6,6 +6,11 @@ var storyListener = function (dom, modal) {
         bindListenForSubmissionOfWWLTWForm(wwltwRepository, modal);
     });
 
+    let clearForm = function (learningBody) {
+        learningBody.value = "";
+        $('.ui.fluid.dropdown').dropdown('restore defaults');
+    };
+
     function bindListenForSubmissionOfWWLTWForm(wwltwRepository, modal) {
         let wwltwForm = dom.querySelector("#wwltw-form");
 
@@ -16,7 +21,7 @@ var storyListener = function (dom, modal) {
 
             wwltwRepository.add(getProjectId(), learningBody.value, tags);
 
-            learningBody.value = "";
+            clearForm(learningBody);
             modal.close();
         });
     }
@@ -47,6 +52,4 @@ var storyListener = function (dom, modal) {
 
         return Array.prototype.join.call(tags, ', ');
     };
-
-
 };
