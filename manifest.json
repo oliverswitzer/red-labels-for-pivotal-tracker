@@ -20,13 +20,20 @@
         "https://www.pivotaltracker.com/*"
       ],
       "js": [
+        "src/tagList.js",
         "src/inject/chrome_adapter.js",
         "src/inject/story_listener.js",
+        "src/inject/wwltw_modal.js",
         "src/wwltw_repository.js",
-        "node_modules/vanilla-modal/dist/index.js"
+        "node_modules/vanilla-modal/dist/index.js",
+        "vendor/jquery/jquery-3.1.1.min.js",
+        "vendor/semantic-ui/dropdown.min.js",
+        "vendor/semantic-ui/transition.min.js"
       ],
       "css": [
-        "css/inject/inject.css"
+        "css/inject/inject.css",
+        "vendor/semantic-ui/dropdown.min.css",
+        "vendor/semantic-ui/transition.min.css"
       ]
     }
   ]
