@@ -21,13 +21,13 @@
       ],
       "js": [
         "src/tagList.js",
-        "src/inject/chrome_adapter.js",
         "src/inject/story_listener.js",
         "src/inject/wwltw_modal.js",
         "src/wwltw_repository.js",
         "node_modules/vanilla-modal/dist/index.js",
         "vendor/jquery/jquery-3.1.1.min.js",
-        "vendor/semantic-ui/semantic.min.js"
+        "vendor/semantic-ui/semantic.min.js",
+        "src/inject/chrome_adapter.js"
       ],
       "css": [
         "vendor/semantic-ui/site.min.css",
@@ -39,7 +39,8 @@
         "vendor/semantic-ui/button.min.css",
         "vendor/semantic-ui/form.min.css",
         "css/inject/inject.css"
-      ]
+      ],
+      "run_at": "document_end"
     }
   ]
 }
