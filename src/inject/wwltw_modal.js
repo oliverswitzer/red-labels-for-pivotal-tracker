@@ -36,10 +36,41 @@ class WWLTWModal {
     initialize() {
         $('.ui.fluid.dropdown').dropdown();
 
-        let $modal = $('.ui.modal').modal();
-
-        return $modal;
+        this.wwltwForm = document.querySelector("#wwltw-form");
+        this.learningBody = document.querySelector("#learning-body");
+        this.$modal = $('.ui.modal').modal();
+        return this;
     }
+
+    clearForm() {
+        this.learningBody.value = "";
+        $('.ui.fluid.dropdown').dropdown('restore defaults');
+    };
+
+    bindFormSubmission(wwltwRepository) {
+        this.wwltwForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            wwltwRepository.add(this.getProjectId(), this.learningBody.value, this.extractSubmittedTags());
+
+            this.clearForm(learningBody);
+            this.$modal.modal('hide');
+        });
+    }
+
+    getProjectId() {
+        return /projects\/(\d*)/.exec(window.location)[1];
+    };
+
+    extractSubmittedTags() {
+        const learningTags = this.wwltwForm.querySelector("#learning-tags");
+        const tags = $(learningTags).find('option:selected')
+            .map(function (i, option) {
+                return option.value;
+            });
+
+        return Array.prototype.join.call(tags, ', ');
+    };
 
     addElementToBody(innerHtml) {
         let modalContainer = document.createElement("div");
