@@ -23,7 +23,7 @@ chrome.extension.sendMessage({}, function () {
             wwltwRepository.add(getProjectId(), learningBody.value, tags);
 
             clearForm(learningBody);
-            modal.close();
+            modal.modal('hide');
         });
     }
 

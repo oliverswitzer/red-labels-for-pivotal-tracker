@@ -25,9 +25,10 @@
         "src/inject/story_listener.js",
         "src/inject/wwltw_modal.js",
         "src/wwltw_repository.js",
-        "node_modules/vanilla-modal/dist/index.js",
         "vendor/jquery/jquery-3.1.1.min.js",
         "vendor/semantic-ui/dropdown.min.js",
+        "vendor/semantic-ui/modal.min.js",
+        "vendor/semantic-ui/dimmer.min.js",
         "vendor/semantic-ui/transition.min.js"
       ],
       "css": [
@@ -39,6 +40,8 @@
         "vendor/semantic-ui/input.min.css",
         "vendor/semantic-ui/button.min.css",
         "vendor/semantic-ui/form.min.css",
+        "vendor/semantic-ui/modal.min.css",
+        "vendor/semantic-ui/dimmer.min.css",
         "css/inject/inject.css"
       ],
       "run_at": "document_end"

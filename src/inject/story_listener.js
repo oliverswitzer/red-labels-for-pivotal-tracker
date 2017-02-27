@@ -41,7 +41,7 @@ var storyListener = function (modal) {
                 Array.prototype.forEach.call(buttons, function(button) {
                     button.addEventListener('click', promptListener, false);
                     function promptListener() {
-                        modal.open("#wwltw-modal");
+                        modal.modal('show');
                         button.removeEventListener('click', promptListener, false);
                     }
                 });

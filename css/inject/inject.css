@@ -1,86 +1,17 @@
-.modal {
-    display: none;
+i.icon {
+    font-family: sans-serif;
 }
 
-.vanilla-modal .modal {
-    display: block;
-    position: fixed;
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.2s, z-index 0s 0.2s;
-    text-align: center;
-    overflow: hidden;
-    overflow-y: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+i.icon.close:before {
+    content: "x"
 }
 
-.vanilla-modal .modal > * {
-    display: inline-block;
-    white-space: normal;
-    vertical-align: middle;
-    text-align: left;
+i.icon.delete:before {
+    content: "x"
 }
 
-.vanilla-modal .modal:before {
-    display: inline-block;
-    overflow: hidden;
-    width: 0;
-    height: 100%;
-    vertical-align: middle;
-    content: "";
-}
-
-.vanilla-modal.modal-visible .modal {
-    z-index: 99;
-    opacity: 1;
-    transition: opacity 0.2s;
-}
-
-.modal-inner {
-    position: relative;
-    overflow: hidden;
-    max-width: 90%;
-    max-height: 90%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background: #fff;
-    z-index: -1;
-    opacity: 0;
-    transform: scale(0);
-    transition: opacity 0.2s, transform 0.2s, z-index 0s 0.2s;
-}
-
-.modal-visible .modal-inner {
-    z-index: 100;
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.2s, transform 0.2s;
-}
-
-[data-modal-close] {
-    position: absolute;
-    z-index: 2;
-    right: 0;
-    top: 0;
-    height: 25px;
-    line-height: 25px;
-    font-size: 13px;
-    cursor: pointer;
-    text-align: center;
-    background: #fff;
-    width: 40px;
-    padding: 10px;
-}
-
-.modal-content {
-    padding: 40px;
+.modal .content {
+    max-width: 77%;
 }
 
 .ui.multiple.dropdown {
@@ -89,17 +20,4 @@
 
 .ui.form textarea {
     padding: .75em 0em .75em .35em;
-}
-
-#header {
-    display: block;
-    padding: 1em 0;
-}
-
-i.icon.delete {
-    font-family: sans-serif;
-}
-
-i.icon.delete:before {
-    content: "x"
 }
