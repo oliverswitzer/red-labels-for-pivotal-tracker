@@ -38,7 +38,11 @@ class WWLTWModal {
 
         this.wwltwForm = document.querySelector("#wwltw-form");
         this.learningBody = document.querySelector("#learning-body");
-        this.$modal = $('.ui.modal').modal();
+        this.$modal = $('.ui.modal').modal({
+            onHide: () => {
+                this.clearForm()
+            }
+        });
         return this;
     }
 
