@@ -51,20 +51,18 @@ class WWLTWModal {
         $('.ui.fluid.dropdown').dropdown('restore defaults');
     };
 
-    bindFormSubmission(wwltwRepository) {
-        this.wwltwForm.addEventListener('submit', function (e) {
+    bindFormSubmission(wwltwRepository, projectId) {
+        this.wwltwForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            wwltwRepository.add(this.getProjectId(), this.learningBody.value, this.extractSubmittedTags());
+            wwltwRepository.add(projectId, this.learningBody.value, this.extractSubmittedTags());
 
-            this.clearForm(learningBody);
+            this.clearForm();
             this.$modal.modal('hide');
         });
     }
 
-    getProjectId() {
-        return /projects\/(\d*)/.exec(window.location)[1];
-    };
+
 
     extractSubmittedTags() {
         const learningTags = this.wwltwForm.querySelector("#learning-tags");
