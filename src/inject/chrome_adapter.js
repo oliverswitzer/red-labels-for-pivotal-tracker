@@ -42,4 +42,5 @@ chrome.extension.sendMessage({}, function () {
     };
 
     storyListener(modal);
+    // findOrCreateWWLTWStory()
 });

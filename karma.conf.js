@@ -3,47 +3,28 @@
 
 module.exports = function(config) {
     config.set({
-
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
 
-
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['jasmine-jquery', 'jasmine'],
-
+        frameworks: ['jasmine'],
 
         // list of files / patterns to load in the browser
         files: [
-            'src/inject/story_listener.js',
+            'src/inject/fetch_wrapper.js',
+            'src/inject/story_creator.js',
+            'src/inject/date_provider.js',
+            'src/inject/wwltw_repository.js',
+            'src/inject/find_or_create_wwltw_story.js',
             '**/*_spec.js',
-            '*.html'
         ],
 
         // list of files to exclude
-        exclude: [
-        ],
-
+        exclude: [],
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {
-            '**/*.html': ['html2js']
-        },
-
-        html2JsPreprocessor: {
-            // strip this from the file path
-            stripPrefix: 'public/',
-
-            // prepend this to the file path
-            prependPrefix: 'served/',
-
-            // or define a custom transform function
-            processPath: function(filePath) {
-                // Drop the file extension
-                return filePath.replace(/\.html$/, '');
-            }
-        },
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
@@ -75,6 +56,6 @@ module.exports = function(config) {
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: true
+        // singleRun: true
     })
-}
+};

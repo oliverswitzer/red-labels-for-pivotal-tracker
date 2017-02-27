@@ -24,7 +24,7 @@
         "src/inject/chrome_adapter.js",
         "src/inject/story_listener.js",
         "src/inject/wwltw_modal.js",
-        "src/wwltw_repository.js",
+        "src/inject/wwltw_repository.js",
         "vendor/jquery/jquery-3.1.1.min.js",
         "vendor/semantic-ui/dropdown.min.js",
         "vendor/semantic-ui/modal.min.js",

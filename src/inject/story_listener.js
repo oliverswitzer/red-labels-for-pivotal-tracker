@@ -1,5 +1,4 @@
 var storyListener = function (modal) {
-
     var readyStateCheckInterval = setInterval(function() {
         if (document.readyState === "complete") {
             clearInterval(readyStateCheckInterval);
