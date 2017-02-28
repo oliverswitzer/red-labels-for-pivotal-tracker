@@ -33,5 +33,8 @@
     "karma-jasmine": "^1.1.0",
     "node-libcurl": "^1.1.0",
     "refresh-token": "^0.1.1"
+  },
+  "dependencies": {
+    "moment": "^2.17.1"
   }
 }
