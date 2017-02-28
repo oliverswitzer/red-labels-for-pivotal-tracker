@@ -1,16 +1,68 @@
 <!DOCTYPE html>
 <html>
-<head><title>WWLTW Options</title></head>
+<head>
+    <title>WWLTW Options</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+    <style>
+        a {
+            color: #00ae9e;
+        }
+        .ui.success.message .header {
+            color: #4D8013;
+        }
+        .ui.success.message {
+            text-align: center;
+            background-color: #EDFFD9;
+            border-color: #4D8013;
+            box-shadow: 0 0 0 1px #4D8013 inset, 0 0 0 0 transparent;
+        }
+        .ui.button, .ui.button:hover {
+            background: #138078;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
 <body>
-
-<label for="tracker-token">
-    Tracker API Token
-    <input type="text" id="tracker-token"/>
-</label>
-
-<div id="status"></div>
-<button id="save">Save</button>
-
+<div class="ui grid container" style="margin-top:50px;">
+    <div class="four wide column"></div>
+    <div class="eight wide column">
+        <h2>What We Learned This Week for Pivotal Tracker</h2>
+        <form class="ui form">
+            <div class="ui grid">
+                <div class="row">
+                    <div class="column" style="text-align:center;">
+                        <label for="tracker-token">
+                            Enter your Pivotal Tacker API token <a href="https://www.pivotaltracker.com/profile">(found
+                            in your
+                            user profile)</a>:
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="four wide column"></div>
+                    <div class="eight wide column">
+                        <input type="text" id="tracker-token"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="six wide column"></div>
+                    <div class="six wide column">
+                        <button id="save" class="ui submit button right floated">Save token</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="four wide column"></div>
+                    <div class="eight wide column">
+                        <div class="ui success message">
+                            <div class="header" id="status">Token saved</div>
+                            <p>Redirecting to Pivotal Tracker...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <script src="options.js"></script>
 </body>
 </html>

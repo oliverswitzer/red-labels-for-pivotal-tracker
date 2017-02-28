@@ -47,5 +47,10 @@
       ],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "background": {
+    "scripts": [
+      "src/inject/first_run.js"
+    ]
+  }
 }

@@ -1,15 +1,17 @@
 // Saves options to chrome.storage
-function save_options() {
+let form = document.querySelector('form');
+function save_options(e) {
+    e.preventDefault();
     var trackerApiToken = document.getElementById('tracker-token').value;
     chrome.storage.sync.set({
         trackerApiToken: trackerApiToken
     }, function() {
         // Update status to let user know options were saved.
-        var status = document.getElementById('status');
-        status.textContent = 'Token saved.';
+        form.classList.add('success');
+
         setTimeout(function() {
-            status.textContent = '';
-        }, 750);
+            window.location = "https://www.pivotaltracker.com/dashboard";
+        }, 1500);
     });
 }
 
@@ -18,8 +20,8 @@ function save_options() {
 function restore_options() {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get('trackerApiToken', function(options) {
-        document.getElementById('tracker-token').value = options.trackerApiToken;
+        document.getElementById('tracker-token').value = options.trackerApiToken || "";
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click', save_options);
+form.addEventListener('submit', save_options)
