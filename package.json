@@ -34,8 +34,5 @@
     "karma-jasmine-jquery": "^0.1.1",
     "node-libcurl": "^1.1.0",
     "refresh-token": "^0.1.1"
-  },
-  "dependencies": {
-    "vanilla-modal": "^1.6.4"
   }
 }
