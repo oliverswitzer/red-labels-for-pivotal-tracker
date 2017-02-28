@@ -25,13 +25,12 @@
   "devDependencies": {
     "child_process": "^1.0.2",
     "get-stdin": "^5.0.1",
+    "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "jsonfile": "^2.4.0",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
-    "karma-html2js-preprocessor": "^1.1.0",
     "karma-jasmine": "^1.1.0",
-    "karma-jasmine-jquery": "^0.1.1",
     "node-libcurl": "^1.1.0",
     "refresh-token": "^0.1.1"
   }
