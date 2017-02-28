@@ -23,11 +23,16 @@ fs.readFile(manifestFile, 'UTF-8', function (err, data) {
     jsonfile.writeFile('dist/' + manifestFile, manifest);
 
     fileList.push(manifest.options_page);
+    fileList.push('src/options.js');
 
     manifest.content_scripts.forEach(function (scripts) {
         (scripts.css.concat(scripts.js)).forEach(function (file) {
             fileList.push(file);
         });
+    });
+
+    manifest.background.scripts.forEach(function (file) {
+        fileList.push(file);
     });
 
     var zipFile = 'dist/' + manifest.short_name + '-' + manifest.version + '.zip';
