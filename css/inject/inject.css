@@ -10,14 +10,19 @@ i.icon.delete:before {
     content: "x"
 }
 
-.modal .content {
-    max-width: 77%;
-}
-
 .ui.multiple.dropdown {
     padding: .25em 0em .25em .35em;
 }
 
 .ui.form textarea {
     padding: .75em 0em .75em .35em;
+}
+
+ .ui.modal *,
+ .ui.modal *:before,
+ .ui.modal *:after {
+box-sizing: inherit;
+}
+.ui.modal {
+box-sizing: border-box;
 }

@@ -1,28 +1,38 @@
 class WWLTWModal {
     constructor() {
         let modalContainer = `
-                <div class="ui fullscreen modal">
-                    <i class="close icon"></i>
-                    <div class="header">What did you learn while working on this story?</div>
-                    <div class="content">
-                        <form id="wwltw-form" class="ui form">
+        <div class="ui modal">
+            <div class="header ui grid">
+                <div class="row">
+                    <div class="twelve wide column"><h3>What did you learn while working on this story?</h3></div>
+                    <div class="four wide column actions"><input type="button" value="Skip"
+                                                                 class="ui deny button negative basic right floated"></div>
+                </div>
+            </div>
+            <div class="content">
+                <form id="wwltw-form" class="ui form">
+                    <div class="ui grid">
+                        <div class="one wide column"></div>
+                        <div class="fourteen wide column">
                             <div class="field">
                                 <label for="learning-body">Body (markdown supported)</label>
                                 <textarea name="learning-body" id="learning-body"></textarea>
                             </div>
                             <div class="field">
-                                <label for="tags">Tags</label>
+                                <label for="learning-tags">Tags</label>
                                 <select name="tags" multiple="" id="learning-tags" class="ui fluid search dropdown">
                                     <option value="">e.g. java, rails, tdd</option>
                                     ${this.populateTags()}
                                 </select>
                             </div>
                             <div class="actions">
-                                <input type="submit" value="Add to WWLTW story" class="ui submit button">
+                                <input type="submit" value="Add to WWLTW story" class="ui submit button right floated">
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>`;
+                </form>
+            </div>
+        </div>`;
 
         this.addElementToBody(modalContainer);
     }
