@@ -1,11 +1,12 @@
 const WWLTWScheduler = {
-    findOrCreateWWLTWStory (storyCreator, wwltwRepository, projectId) {
+    findOrCreateWWLTWStory (wwltwRepository) {
+        const projectId = ProjectIdProvider.getProjectId();
         const title = StoryTitleProvider.currentStoryTitle();
 
-        return wwltwRepository.findByTitle(title, projectId)
+        return wwltwRepository.findByTitle(projectId, title)
             .then(function (responseJson) {
                 if (responseJson.length == 0) {
-                    return storyCreator.addStory(title, projectId);
+                    return wwltwRepository.create(projectId, title);
                 }
             })
     }
