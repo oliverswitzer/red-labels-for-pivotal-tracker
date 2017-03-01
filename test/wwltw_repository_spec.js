@@ -1,72 +1,103 @@
 describe('WWLTWRepository', function () {
     let wwltwRepository;
-    let fetchWrapper;
+    let trackerApiClientSpy;
     const storyTitle = 'some story title';
     const projectId = 'some-project-id';
-    const apiToken = 'some tracker api token';
 
     beforeEach(function () {
-        fetchWrapper = jasmine.createSpy('fetchWrapper').and.returnValue(Promise.resolve({}));
+        trackerApiClientSpy = new PivotalTrackerApiClient();
+
+        spyOn(trackerApiClientSpy, 'getStory');
+        spyOn(trackerApiClientSpy, 'updateStory');
+        spyOn(trackerApiClientSpy, 'createStory');
 
         spyOn(StoryTitleProvider, 'currentStoryTitle').and.returnValue(storyTitle);
-        wwltwRepository = new WWLTWRepository(apiToken, fetchWrapper);
+
+        wwltwRepository = new WWLTWRepository(trackerApiClientSpy);
     });
 
     describe('findByTitle', function () {
         beforeEach(function () {
-            wwltwRepository.findByTitle(storyTitle, projectId);
+            wwltwRepository.findByTitle(projectId, storyTitle);
         });
 
-        it('calls fetchWrapper with project id in URL', function () {
-            const url = new URL(fetchWrapper.calls.mostRecent().args[0]);
-
-            expect(url.origin).toEqual(wwltwRepository.TRACKER_BASE_URL);
-            expect(url.pathname).toEqual(`/services/v5/projects/${projectId}/stories`);
+        it('calls pivotalTrackerApiClient with project id', function () {
+            expect(trackerApiClientSpy.getStory).toHaveBeenCalledWith(projectId, jasmine.any(Object));
         });
 
-        it('calls fetchWrapper with title in params', function () {
-            const params = new URL(fetchWrapper.calls.mostRecent().args[0]).searchParams;
-
-            expect(params.get('filter')).toEqual('"some story title"');
-        });
-
-        it('calls fetchWRapper with correct token header', function () {
-            const headers = fetchWrapper.calls.mostRecent().args[1].headers;
-
-            expect(headers.get('X-TrackerToken')).toEqual(apiToken);
+        it('calls pivotalTrackerApiClient with expected query params', function () {
+            expect(trackerApiClientSpy.getStory).toHaveBeenCalledWith(
+                jasmine.any(String),
+                { filter: storyTitle }
+            );
         });
     });
 
-    describe('add', function () {
-        context('when findByTitle returns story with WWLTW items in it already', function () {
-            const storyId = 1234;
+    describe('update', function () {
+        const story = {
+            id: '1234',
+            description: 'existing description'
+        };
+        const projectId = 'some project id';
+
+        it('passes the project id to trackerApiClient.updateStory', function () {
+            wwltwRepository.update(projectId, story, 'some tag, other tag', 'some learning');
+
+            expect(trackerApiClientSpy.updateStory).toHaveBeenCalledWith(
+                projectId,
+                jasmine.any(String),
+                jasmine.any(String)
+            );
+        });
+
+        it('passes the story id to trackerApiClient.updateStory', function () {
+            wwltwRepository.update(projectId, story, 'some tag, other tag', 'some learning');
+
+            expect(trackerApiClientSpy.updateStory).toHaveBeenCalledWith(
+                jasmine.any(String),
+                story.id,
+                jasmine.any(String));
+        });
+
+        describe('story description', function () {
+            const newDescription = 'new description';
+            const learningTags = 'some tag, other tag';
+            const learningBody = 'some learning';
+
             beforeEach(function () {
-                spyOn(wwltwRepository, 'findByTitle').and.returnValue(Promise.resolve([{
-                    id: storyId,
-                    description: 'stuff other people learned'
-                }]));
+                spyOn(DescriptionBuilder, 'build').and.returnValue(newDescription);
             });
 
-            it('formats correct URL to update WWLTW story  ', function (done) {
-                wwltwRepository.add(projectId, 'i learned some stuff', 'tags, tags, tags').then(function () {
-                    let url = new URL(fetchWrapper.calls.mostRecent().args[0]);
+            it('builds an updated description from original story description', function () {
+                wwltwRepository.update(projectId, story, learningTags, learningBody);
 
-                    expect(wwltwRepository.findByTitle).toHaveBeenCalledWith(storyTitle, projectId);
-                    expect(url.origin).toEqual(wwltwRepository.TRACKER_BASE_URL);
-                    expect(url.pathname).toEqual(`/services/v5/projects/${projectId}/stories/${storyId}`);
-                    done();
-                });
+                expect(DescriptionBuilder.build).toHaveBeenCalledWith(learningTags, learningBody, story.description);
             });
 
-            it('adds the updated story description to the body', function () {
-                wwltwRepository.add(projectId, 'i learned some stuff', 'tags, tags, tags').then(function () {
-                    const body = JSON.parse(fetchWrapper.calls.mostRecent().args[1].body);
+            it('passes the updated description to trackerApiClient.updateStory', function () {
+                wwltwRepository.update(projectId, story, learningTags, learningBody);
 
-                    expect(body.description).toContain('stuff other people learned');
-                    expect(body.description).toContain('i learned some stuff');
-                    expect(body.description).toContain('_Tags: tags, tags, tags_');
-                });
+                expect(trackerApiClientSpy.updateStory).toHaveBeenCalledWith(
+                    jasmine.any(String),
+                    jasmine.any(String),
+                    newDescription
+                );
             });
+        });
+
+    });
+
+    describe('create', function () {
+        it('calls tracker api client', function () {
+            wwltwRepository.create(projectId, storyTitle);
+
+            expect(trackerApiClientSpy.createStory).toHaveBeenCalledWith(
+                projectId,
+                jasmine.objectContaining({
+                    name: storyTitle,
+                    story_type: 'chore'
+                })
+            );
         });
     });
 });

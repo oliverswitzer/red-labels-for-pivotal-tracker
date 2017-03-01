@@ -51,18 +51,16 @@ class WWLTWModal {
         $('.ui.fluid.dropdown').dropdown('restore defaults');
     };
 
-    bindFormSubmission(wwltwRepository, projectId) {
+    bindFormSubmission(thingToDoOnSubmit) {
         this.wwltwForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            wwltwRepository.add(projectId, this.learningBody.value, this.extractSubmittedTags());
+            thingToDoOnSubmit(this.extractSubmittedTags(), this.learningBody.value);
 
             this.clearForm();
             this.$modal.modal('hide');
         });
     }
-
-
 
     extractSubmittedTags() {
         const learningTags = this.wwltwForm.querySelector("#learning-tags");

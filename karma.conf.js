@@ -14,10 +14,13 @@ module.exports = function(config) {
         files: [
             'node_modules/moment/min/moment.min.js',
             'src/inject/fetch_wrapper.js',
-            'src/inject/story_creator.js',
             'src/inject/story_title_provider.js',
             'src/inject/wwltw_repository.js',
             'src/inject/find_or_create_wwltw_story.js',
+            'src/inject/pivotal_tracker_api_client.js',
+            'src/inject/project_id_provider.js',
+            'src/inject/description_builder.js',
+            'src/inject/add_learning_to_story_description.js',
             '**/*_spec.js',
         ],
 

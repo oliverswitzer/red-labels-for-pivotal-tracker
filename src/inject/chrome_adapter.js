@@ -2,16 +2,14 @@ chrome.extension.sendMessage({}, function () {
     const modalInitializer = new WWLTWModal();
     const modal = modalInitializer.initialize();
 
-    function getProjectId() {
-        return /projects\/(\d*)/.exec(window.location)[1];
-    };
-
     chrome.storage.sync.get('trackerApiToken', function(options) {
-        let wwltwRepository = new WWLTWRepository(options.trackerApiToken, fetchWrapper);
-        modal.bindFormSubmission(wwltwRepository, getProjectId());
+        let wwltwRepository = new WWLTWRepository(new PivotalTrackerApiClient(options.trackerApiToken, fetchWrapper));
+
+        const addLearningToStoryDescription = new AddLearningToStoryDescription(wwltwRepository);
+        modal.bindFormSubmission(addLearningToStoryDescription.execute);
 
         storyListener(modal.$modal);
 
-        WWLTWScheduler.findOrCreateWWLTWStory(new StoryCreator(fetchWrapper, options.trackerApiToken), wwltwRepository, getProjectId())
+        WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepository);
     });
 });

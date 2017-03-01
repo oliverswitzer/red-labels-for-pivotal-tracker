@@ -1,14 +1,12 @@
 let context = describe;
 
 describe('findOrCreateWWLTWStory', function () {
-    let storyCreatorSpy;
     let wwltwRepositorySpy;
     let promiseHelper;
     let findByTitleResponse;
     let findByTitlePromise;
 
     beforeEach(function () {
-        storyCreatorSpy = new StoryCreator();
         wwltwRepositorySpy = new WWLTWRepository();
 
         findByTitlePromise = new Promise(function (resolve) {
@@ -16,16 +14,16 @@ describe('findOrCreateWWLTWStory', function () {
                 resolve
             };
         });
-
+        spyOn(ProjectIdProvider, 'getProjectId').and.returnValue('some project id');
         spyOn(StoryTitleProvider, 'currentStoryTitle').and.returnValue('WWLTW for the week of 2/25');
-        spyOn(storyCreatorSpy, 'addStory');
         spyOn(wwltwRepositorySpy, 'findByTitle').and.returnValue(findByTitlePromise);
+        spyOn(wwltwRepositorySpy, 'create');
     });
 
     it('checks if a WWLTW story already exists', function () {
-        WWLTWScheduler.findOrCreateWWLTWStory(storyCreatorSpy, wwltwRepositorySpy, "some project id");
+        WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepositorySpy);
 
-        expect(wwltwRepositorySpy.findByTitle).toHaveBeenCalledWith('WWLTW for the week of 2/25', jasmine.any(String))
+        expect(wwltwRepositorySpy.findByTitle).toHaveBeenCalledWith("some project id", 'WWLTW for the week of 2/25')
     });
 
     context('when no WWLTW story exists previously', function () {
@@ -33,30 +31,30 @@ describe('findOrCreateWWLTWStory', function () {
             findByTitleResponse =[];
         });
 
-        it('calls addStory with correct date', function (done) {
-            const promise = WWLTWScheduler.findOrCreateWWLTWStory(storyCreatorSpy, wwltwRepositorySpy, "some project id");
+        it('calls WWLTWRepository.create with correct date', function (done) {
+            const promise = WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepositorySpy);
 
             promiseHelper.resolve(findByTitleResponse);
 
             promise.then(function () {
-                expect(storyCreatorSpy.addStory).toHaveBeenCalledWith(
-                    'WWLTW for the week of 2/25',
-                    jasmine.any(String)
+                expect(wwltwRepositorySpy.create).toHaveBeenCalledWith(
+                    jasmine.any(String),
+                    'WWLTW for the week of 2/25'
                 );
 
                 done()
             });
         });
 
-        it('calls addStory with project id', function (done) {
-            const promise = WWLTWScheduler.findOrCreateWWLTWStory(storyCreatorSpy, wwltwRepositorySpy, "some project id");
+        it('calls wwltwRepository.create with project id', function (done) {
+            const promise = WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepositorySpy);
 
             promiseHelper.resolve(findByTitleResponse);
 
             promise.then(function () {
-                expect(storyCreatorSpy.addStory).toHaveBeenCalledWith(
-                    jasmine.any(String),
-                    'some project id'
+                expect(wwltwRepositorySpy.create).toHaveBeenCalledWith(
+                    'some project id',
+                    jasmine.any(String)
                 );
 
                 done();
@@ -73,12 +71,12 @@ describe('findOrCreateWWLTWStory', function () {
             };
         });
 
-        it('does not call addStory', function () {
-            WWLTWScheduler.findOrCreateWWLTWStory(storyCreatorSpy, wwltwRepositorySpy, "some project id");
+        it('does not call wwltwRepository.create', function () {
+            WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepositorySpy);
 
             promiseHelper.resolve(findByTitleResponse);
 
-            expect(storyCreatorSpy.addStory).not.toHaveBeenCalled();
+            expect(wwltwRepositorySpy.create).not.toHaveBeenCalled();
         });
     })
 });
