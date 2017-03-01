@@ -1,4 +1,4 @@
-chrome.extension.sendMessage({}, function () {
+$(function () {
     const modalInitializer = new WWLTWModal();
     const modal = modalInitializer.initialize();
 
@@ -6,7 +6,7 @@ chrome.extension.sendMessage({}, function () {
         return /projects\/(\d*)/.exec(window.location)[1];
     };
 
-    chrome.storage.sync.get('trackerApiToken', function(options) {
+    chrome.storage.sync.get('trackerApiToken', function (options) {
         let wwltwRepository = new WWLTWRepository(options.trackerApiToken, fetchWrapper);
         modal.bindFormSubmission(wwltwRepository, getProjectId());
 
