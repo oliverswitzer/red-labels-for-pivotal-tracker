@@ -18,11 +18,10 @@ i.icon.delete:before {
     padding: .75em 0em .75em .35em;
 }
 
- .ui.modal *,
- .ui.modal *:before,
- .ui.modal *:after {
-box-sizing: inherit;
+.ui.modal *, .ui.modal *:before, .ui.modal *:after {
+    box-sizing: inherit;
 }
+
 .ui.modal {
-box-sizing: border-box;
+    box-sizing: border-box;
 }
