@@ -20,10 +20,6 @@
             background: #138078;
             color: #FFFFFF;
         }
-
-        form {
-            margin-top: 50px;
-        }
     </style>
 </head>
 <body>
@@ -32,26 +28,22 @@
     <div class="eight wide column">
         <h2>What We Learned This Week for Pivotal Tracker</h2>
 
-        <h5>Once you've added your Pivotal Tracker API token below, this extension will:</h5>
+        <h5>What does this extension do?</h5>
+        <p>Once you've added your Pivotal Tracker API token below, this extension will:</p>
         <ul>
             <li>Create a weekly "WWLTW for [This Friday's date]" chore at the top of your icebox</li>
             <li>Prompt you to enter your learnings upon Finishing stories</li>
             <li>Append your learnings to the description of the current week's WWLTW chore for easy copying (markdown and all!) into your email</li>
         </ul>
+
+        <h5>How do I get started?</h5>
+        <p>Enter your Pivotal Tracker API token below. You can find your API token <a href="https://www.pivotaltracker.com/profile" target="_blank">right here on your Tracker user profile</a>.</p>
         <form class="ui form">
             <div class="ui grid">
                 <div class="row">
-                    <div class="column" style="text-align:center;">
-                        <label for="tracker-token">
-                            Enter your Pivotal Tacker API token <a href="https://www.pivotaltracker.com/profile" target="_blank">(found
-                            in your
-                            user profile)</a>:
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="four wide column"></div>
                     <div class="eight wide column">
+                        <label for="tracker-token">API token</label>
                         <input type="text" id="tracker-token"/>
                     </div>
                 </div>
