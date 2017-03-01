@@ -65,7 +65,7 @@
   "background": {
     "scripts": [
       "src/background/first_run.js",
-      "src/background/alarm_manager.js",
+      "src/background/alarm_manager.js"
     ]
   }
 }
