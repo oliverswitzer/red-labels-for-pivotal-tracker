@@ -22,6 +22,7 @@ module.exports = function(config) {
             'src/content_scripts/repositories/wwltw_repository.js',
             'src/content_scripts/use_cases/add_learning_to_story_description.js',
             'src/content_scripts/use_cases/find_or_create_wwltw_story.js',
+            'test/test_helpers.js',
             '**/*_spec.js',
         ],
 
