@@ -1,5 +1,3 @@
-let context = describe;
-
 describe('findOrCreateWWLTWStory', function () {
     let storyCreatorSpy;
     let wwltwRepositorySpy;

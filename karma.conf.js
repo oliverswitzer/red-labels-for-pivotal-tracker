@@ -14,6 +14,7 @@ module.exports = function(config) {
         files: [
             'vendor/moment/moment.min.js',
             'src/content_scripts/utilities/fetch_wrapper.js',
+            'src/content_scripts/utilities/date_wrapper.js',
             'src/content_scripts/utilities/story_creator.js',
             'src/content_scripts/utilities/story_title_provider.js',
             'src/content_scripts/utilities/wwltw_repository.js',

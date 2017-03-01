@@ -28,6 +28,7 @@
         "vendor/semantic-ui/dimmer.min.js",
         "vendor/semantic-ui/transition.min.js",
         "src/content_scripts/utilities/fetch_wrapper.js",
+        "src/content_scripts/utilities/date_wrapper.js",
         "src/content_scripts/utilities/find_or_create_wwltw_story.js",
         "src/content_scripts/utilities/story_creator.js",
         "src/content_scripts/utilities/tagList.js",
