@@ -12,4 +12,14 @@ class DateWrapper {
 
         return nextFriday.toDate();
     }
+
+    todayAt(hours, minutes) {
+        let date = moment();
+        date.hour(hours);
+        date.minutes(minutes);
+        date.seconds(0);
+        date.milliseconds(0);
+
+        return date.toDate();
+    }
 }

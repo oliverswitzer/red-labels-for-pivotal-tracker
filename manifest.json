@@ -59,7 +59,7 @@
   ],
   "background": {
     "scripts": [
-      "src/inject/first_run.js"
+      "src/background/first_run.js"
     ]
   }
 }
