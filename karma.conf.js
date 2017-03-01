@@ -12,12 +12,12 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'node_modules/moment/min/moment.min.js',
-            'src/inject/fetch_wrapper.js',
-            'src/inject/story_creator.js',
-            'src/inject/story_title_provider.js',
-            'src/inject/wwltw_repository.js',
-            'src/inject/find_or_create_wwltw_story.js',
+            'vendor/moment/moment.min.js',
+            'src/content_scripts/utilities/fetch_wrapper.js',
+            'src/content_scripts/utilities/story_creator.js',
+            'src/content_scripts/utilities/story_title_provider.js',
+            'src/content_scripts/utilities/wwltw_repository.js',
+            'src/content_scripts/utilities/find_or_create_wwltw_story.js',
             '**/*_spec.js',
         ],
 

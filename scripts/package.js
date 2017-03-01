@@ -23,7 +23,7 @@ fs.readFile(manifestFile, 'UTF-8', function (err, data) {
     jsonfile.writeFile('dist/' + manifestFile, manifest);
 
     fileList.push(manifest.options_page);
-    fileList.push('src/options.js');
+    fileList.push('src/index.js');
 
     manifest.content_scripts.forEach(function (scripts) {
         (scripts.css.concat(scripts.js)).forEach(function (file) {
