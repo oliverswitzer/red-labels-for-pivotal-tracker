@@ -2,7 +2,6 @@ import AddLearningToStoryDescription from '../../../src/content_scripts/use_case
 import WWLTWRepository from '../../../src/content_scripts/repositories/wwltw_repository';
 import StoryTitleProvider from '../../../src/content_scripts/utilities/story_title_provider';
 import ProjectIdProvider from '../../../src/content_scripts/utilities/project_id_provider';
-import AnalyticsWrapper from "../../../src/content_scripts/utilities/analytics_wrapper";
 
 describe('AddLearningToStoryDescription', function () {
     let wwltwRepositorySpy;
@@ -16,7 +15,7 @@ describe('AddLearningToStoryDescription', function () {
 
         foundStory = {id: '1234'};
 
-        spyOn(AnalyticsWrapper, 'sendEvent');
+        spyOn(chrome.runtime, 'sendMessage');
         spyOn(wwltwRepositorySpy, 'findByTitle').and.returnValue(Promise.resolve([foundStory]));
         spyOn(wwltwRepositorySpy, 'update').and.returnValue(Promise.resolve());
         spyOn(StoryTitleProvider, 'currentStoryTitle').and.returnValue(storyTitle);
@@ -39,7 +38,7 @@ describe('AddLearningToStoryDescription', function () {
 
             it('sends analytics data', function () {
                 execute();
-                expect(AnalyticsWrapper.sendEvent).toHaveBeenCalledWith('submit');
+                expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({ eventType: 'submit' });
             });
 
             it('updates the found story', function (done) {

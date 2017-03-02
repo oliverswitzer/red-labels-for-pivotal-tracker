@@ -1,6 +1,5 @@
 import ProjectIdProvider from '../utilities/project_id_provider'
 import StoryTitleProvider from '../utilities/story_title_provider'
-import AnalyticsWrapper from "../utilities/analytics_wrapper";
 
 export default class AddLearningToStoryDescription {
     constructor(wwltwRepository) {
@@ -10,7 +9,7 @@ export default class AddLearningToStoryDescription {
     }
 
     execute(learningTags, learningBody) {
-        AnalyticsWrapper.sendEvent('submit');
+        chrome.runtime.sendMessage({ eventType: 'submit' });
         const projectId = ProjectIdProvider.getProjectId();
 
         return this.wwltwRepository.findByTitle(projectId, StoryTitleProvider.currentStoryTitle())

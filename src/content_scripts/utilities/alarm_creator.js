@@ -1,4 +1,4 @@
-import DateWrapper from './utilities/date_wrapper'
+import DateWrapper from './date_wrapper'
 
 export default function (chrome) {
     function logAlarmReceived (response) {

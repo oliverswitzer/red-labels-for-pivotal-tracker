@@ -24,4 +24,4 @@ function restore_options() {
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-form.addEventListener('submit', save_options)
+form.addEventListener('submit', save_options);

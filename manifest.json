@@ -15,7 +15,7 @@
   ],
   "options_page": "src/options/index.html",
   "short_name": "WWLTW",
-  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'",
   "content_scripts": [
     {
       "matches": [
@@ -46,8 +46,10 @@
   ],
   "background": {
     "scripts": [
+      "src/background/event_listener.js",
       "src/background/first_run.js",
-      "src/background/alarm_manager.js"
+      "src/background/alarm_listener.js",
+      "src/background/send_event.js"
     ]
   }
 }
