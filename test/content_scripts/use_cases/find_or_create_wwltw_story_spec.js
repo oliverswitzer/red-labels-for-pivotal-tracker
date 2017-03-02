@@ -1,6 +1,6 @@
-import WWLTWScheduler from '../../../src/content_scripts/use_cases/find_or_create_wwltw_story'
 import WWLTWRepository from '../../../src/content_scripts/repositories/wwltw_repository'
-import ProjectIdProvider from '../../../src/content_scripts/utilities/project_id_provider';
+import FindOrCreateWWLTWStory from '../../../src/content_scripts/use_cases/find_or_create_wwltw_story'
+import ProjectIdProvider from '../../../src/content_scripts/utilities/project_id_provider'
 import StoryTitleProvider from '../../../src/content_scripts/utilities/story_title_provider'
 
 describe('findOrCreateWWLTWStory', function () {
@@ -24,7 +24,7 @@ describe('findOrCreateWWLTWStory', function () {
     });
 
     it('checks if a WWLTW story already exists', function () {
-        WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepositorySpy);
+        FindOrCreateWWLTWStory(wwltwRepositorySpy);
 
         expect(wwltwRepositorySpy.findByTitle).toHaveBeenCalledWith("some project id", 'WWLTW for the week of 2/25')
     });
@@ -35,7 +35,7 @@ describe('findOrCreateWWLTWStory', function () {
         });
 
         it('calls WWLTWRepository.create with correct date', function (done) {
-            const promise = WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepositorySpy);
+            const promise = FindOrCreateWWLTWStory(wwltwRepositorySpy);
 
             promiseHelper.resolve(findByTitleResponse);
 
@@ -50,7 +50,7 @@ describe('findOrCreateWWLTWStory', function () {
         });
 
         it('calls wwltwRepository.create with project id', function (done) {
-            const promise = WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepositorySpy);
+            const promise = FindOrCreateWWLTWStory(wwltwRepositorySpy);
 
             promiseHelper.resolve(findByTitleResponse);
 
@@ -75,7 +75,7 @@ describe('findOrCreateWWLTWStory', function () {
         });
 
         it('does not call wwltwRepository.create', function () {
-            WWLTWScheduler.findOrCreateWWLTWStory(wwltwRepositorySpy);
+            FindOrCreateWWLTWStory(wwltwRepositorySpy);
 
             promiseHelper.resolve(findByTitleResponse);
 
