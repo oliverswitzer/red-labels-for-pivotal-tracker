@@ -15,6 +15,7 @@
   ],
   "options_page": "src/options/index.html",
   "short_name": "WWLTW",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "content_scripts": [
     {
       "matches": [
@@ -37,6 +38,7 @@
         "src/content_scripts/utilities/fetch_wrapper.js",
         "src/content_scripts/utilities/date_wrapper.js",
         "src/content_scripts/utilities/story_title_provider.js",
+        "src/content_scripts/utilities/analytics_wrapper.js",
         "src/content_scripts/repositories/wwltw_repository.js",
         "src/content_scripts/alarm_creator.js",
         "src/content_scripts/use_cases/add_learning_to_story_description.js",

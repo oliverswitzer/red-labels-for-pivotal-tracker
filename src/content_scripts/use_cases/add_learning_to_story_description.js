@@ -6,6 +6,7 @@ class AddLearningToStoryDescription {
     }
 
     execute(learningTags, learningBody) {
+        AnalyticsWrapper.sendEvent('submit');
         const projectId = ProjectIdProvider.getProjectId();
 
         return this.wwltwRepository.findByTitle(projectId, StoryTitleProvider.currentStoryTitle())

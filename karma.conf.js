@@ -19,6 +19,7 @@ module.exports = function(config) {
             'src/content_scripts/utilities/pivotal_tracker_api_client.js',
             'src/content_scripts/utilities/project_id_provider.js',
             'src/content_scripts/utilities/description_builder.js',
+            'src/content_scripts/utilities/analytics_wrapper.js',
             'src/content_scripts/repositories/wwltw_repository.js',
             'src/content_scripts/use_cases/add_learning_to_story_description.js',
             'src/content_scripts/use_cases/find_or_create_wwltw_story.js',

@@ -10,6 +10,7 @@ describe('AddLearningToStoryDescription', function () {
 
         foundStory = {id: '1234'};
 
+        spyOn(AnalyticsWrapper, 'sendEvent');
         spyOn(wwltwRepositorySpy, 'findByTitle').and.returnValue(Promise.resolve([foundStory]));
         spyOn(wwltwRepositorySpy, 'update').and.returnValue(Promise.resolve());
         spyOn(StoryTitleProvider, 'currentStoryTitle').and.returnValue(storyTitle);
@@ -30,6 +31,11 @@ describe('AddLearningToStoryDescription', function () {
                 );
             });
 
+            it('sends analytics data', function () {
+                execute();
+                expect(AnalyticsWrapper.sendEvent).toHaveBeenCalledWith('submit');
+            });
+
             it('updates the found story', function (done) {
                 const body = 'some body';
                 const tags = 'some tag, some other tag';
@@ -40,7 +46,7 @@ describe('AddLearningToStoryDescription', function () {
                     );
                     done();
                 });
-            })
+            });
         });
     });
 });

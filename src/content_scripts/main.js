@@ -1,6 +1,7 @@
 $(function () {
     const modalInitializer = new WWLTWModal();
     const modal = modalInitializer.initialize();
+    AnalyticsWrapper.initialize();
 
     chrome.storage.sync.get('trackerApiToken', function (options) {
         let wwltwRepository = new WWLTWRepository(new PivotalTrackerApiClient(options.trackerApiToken, fetchWrapper));
