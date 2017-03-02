@@ -19,8 +19,8 @@
   "content_scripts": [
     {
       "matches": [
-        "http://www.pivotaltracker.com/*",
-        "https://www.pivotaltracker.com/*"
+        "http://www.pivotaltracker.com/n/projects*",
+        "https://www.pivotaltracker.com/n/projects*"
       ],
       "js": [
         "bundle.js"
