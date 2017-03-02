@@ -9,13 +9,37 @@ ISC License (included in the `LICENSE` file).
 
 ## Running the tests
 
-First time:
+```
+$ npm run test
+```
 
+or to run continually you'll need to install Karma
 ```
 $ npm install -g karma-cli
 ```
-
-To run jasmine tests server which will continually run the test suite
+and to run:
 ```
 $ karma start
+```
+
+---
+
+## Building and Deploying
+
+To build a new version, you'll want to bump the `version` and `version_name` in `manifest.json`.
+Then run:
+
+```$xslt
+$ npm run package
+```
+
+This runs webpack and then creates a .zip file in the dist/ directory using `scripts/package.js`. Zipped files include 
+your `manifest.json`, `content_scripts`, `background.scripts`, and `options_page`.
+
+## Development
+
+Before you load your chrome extension into the browser, make sure that you run:
+
+```$xslt
+$ npm run weback
 ```
