@@ -1,3 +1,5 @@
+import DateWrapper from '../../../src/content_scripts/utilities/date_wrapper'
+
 describe('DateWrapper', function () {
 
     let dateWrapper;

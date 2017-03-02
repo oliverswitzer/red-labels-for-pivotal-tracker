@@ -1,3 +1,5 @@
+import DescriptionBuilder from '../../../src/content_scripts/utilities/description_builder'
+
 describe('DescriptionBuilder', function () {
     const tags = 'tag, tag, tag';
     const body = 'I learned some stuff';

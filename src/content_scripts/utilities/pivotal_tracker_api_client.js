@@ -1,4 +1,4 @@
-class PivotalTrackerApiClient {
+export default class PivotalTrackerApiClient {
     constructor(trackerApiToken, fetchWrapper) {
         this.trackerApiToken = trackerApiToken;
         this.TRACKER_BASE_URL = "https://www.pivotaltracker.com";

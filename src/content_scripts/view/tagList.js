@@ -1,4 +1,4 @@
-const tagList = [
+export default [
     'acceptance-testing',
     'adapt',
     'advice',

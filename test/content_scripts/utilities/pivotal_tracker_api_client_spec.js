@@ -1,3 +1,5 @@
+import PivotalTrackerApiClient from '../../../src/content_scripts/utilities/pivotal_tracker_api_client'
+
 describe('PivotalTrackerApiClient', function () {
     let apiClient;
     let fetchWrapper;

@@ -1,4 +1,6 @@
-class DateWrapper {
+import moment from 'moment'
+
+export default class DateWrapper {
     nextFriday() {
         return moment().endOf('week').subtract(1, 'day');
     }
@@ -11,15 +13,5 @@ class DateWrapper {
         nextFriday.milliseconds(0);
 
         return nextFriday.toDate();
-    }
-
-    todayAt(hours, minutes) {
-        let date = moment();
-        date.hour(hours);
-        date.minutes(minutes);
-        date.seconds(0);
-        date.milliseconds(0);
-
-        return date.toDate();
     }
 }

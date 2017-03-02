@@ -1,3 +1,8 @@
+import WWLTWScheduler from '../../../src/content_scripts/use_cases/find_or_create_wwltw_story'
+import WWLTWRepository from '../../../src/content_scripts/repositories/wwltw_repository'
+import ProjectIdProvider from '../../../src/content_scripts/utilities/project_id_provider';
+import StoryTitleProvider from '../../../src/content_scripts/utilities/story_title_provider'
+
 describe('findOrCreateWWLTWStory', function () {
     let wwltwRepositorySpy;
     let promiseHelper;

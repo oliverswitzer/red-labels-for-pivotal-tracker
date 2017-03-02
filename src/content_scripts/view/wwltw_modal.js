@@ -1,4 +1,11 @@
-class WWLTWModal {
+import tagList from './tagList';
+import $ from 'jquery';
+$.fn.modal= require('semantic-ui-modal');
+$.fn.dropdown = require('semantic-ui-dropdown');
+$.fn.transition = require('semantic-ui-transition');
+$.fn.dimmer = require('semantic-ui-dimmer');
+
+export default class WWLTWModal {
     constructor() {
         let modalContainer = `
         <div class="ui modal">

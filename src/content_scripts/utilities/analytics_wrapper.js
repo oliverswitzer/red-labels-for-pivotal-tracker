@@ -1,4 +1,4 @@
-class AnalyticsWrapper {
+export default class AnalyticsWrapper {
     static sendEvent(eventType) {
         ga('send', 'event', 'modal', eventType);
     }

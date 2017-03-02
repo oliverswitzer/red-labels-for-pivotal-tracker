@@ -1,3 +1,3 @@
-function fetchWrapper(url, configuration){
+export default function fetchWrapper(url, configuration){
     return window.fetch(url, configuration);
 }

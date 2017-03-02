@@ -1,3 +1,9 @@
+import AddLearningToStoryDescription from '../../../src/content_scripts/use_cases/add_learning_to_story_description'
+import WWLTWRepository from '../../../src/content_scripts/repositories/wwltw_repository';
+import StoryTitleProvider from '../../../src/content_scripts/utilities/story_title_provider';
+import ProjectIdProvider from '../../../src/content_scripts/utilities/project_id_provider';
+import AnalyticsWrapper from "../../../src/content_scripts/utilities/analytics_wrapper";
+
 describe('AddLearningToStoryDescription', function () {
     let wwltwRepositorySpy;
     let foundStory;

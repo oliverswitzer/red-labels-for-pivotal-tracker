@@ -1,3 +1,7 @@
+import WWLTWRepository from '../../../src/content_scripts/repositories/wwltw_repository'
+import StoryTitleProvider from '../../../src/content_scripts/utilities/story_title_provider'
+import DescriptionBuilder from '../../../src/content_scripts/utilities/description_builder'
+
 describe('WWLTWRepository', function () {
     let wwltwRepository;
     let trackerApiClientSpy;
@@ -5,11 +9,7 @@ describe('WWLTWRepository', function () {
     const projectId = 'some-project-id';
 
     beforeEach(function () {
-        trackerApiClientSpy = new PivotalTrackerApiClient();
-
-        spyOn(trackerApiClientSpy, 'getStory');
-        spyOn(trackerApiClientSpy, 'updateStory');
-        spyOn(trackerApiClientSpy, 'createStory');
+        trackerApiClientSpy = jasmine.createSpyObj('trackerApiClient', ['getStory', 'updateStory', 'createStory']);
 
         spyOn(StoryTitleProvider, 'currentStoryTitle').and.returnValue(storyTitle);
 

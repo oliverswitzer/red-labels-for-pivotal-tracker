@@ -1,4 +1,8 @@
-class AddLearningToStoryDescription {
+import ProjectIdProvider from '../utilities/project_id_provider'
+import StoryTitleProvider from '../utilities/story_title_provider'
+import AnalyticsWrapper from "../utilities/analytics_wrapper";
+
+export default class AddLearningToStoryDescription {
     constructor(wwltwRepository) {
         this.wwltwRepository = wwltwRepository;
 

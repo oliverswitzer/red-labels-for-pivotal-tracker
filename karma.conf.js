@@ -1,6 +1,8 @@
 // Karma configuration
 // Generated on Thu Aug 06 2015 23:34:21 GMT-0400 (Eastern Daylight Time)
 
+var webpackConfig = require('./webpack.config');
+
 module.exports = function(config) {
     config.set({
         // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -13,19 +15,14 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             'vendor/moment/moment.min.js',
-            'src/content_scripts/utilities/fetch_wrapper.js',
-            'src/content_scripts/utilities/date_wrapper.js',
-            'src/content_scripts/utilities/story_title_provider.js',
-            'src/content_scripts/utilities/pivotal_tracker_api_client.js',
-            'src/content_scripts/utilities/project_id_provider.js',
-            'src/content_scripts/utilities/description_builder.js',
-            'src/content_scripts/utilities/analytics_wrapper.js',
-            'src/content_scripts/repositories/wwltw_repository.js',
-            'src/content_scripts/use_cases/add_learning_to_story_description.js',
-            'src/content_scripts/use_cases/find_or_create_wwltw_story.js',
             'test/test_helpers.js',
             '**/*_spec.js',
         ],
+
+        preprocessors: {
+            // add webpack as preprocessor
+            '**/*_spec.js': ['webpack', 'sourcemap']
+        },
 
         // list of files to exclude
         exclude: [],
@@ -38,7 +35,7 @@ module.exports = function(config) {
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         reporters: ['progress'],
 
-
+        webpack: webpackConfig,
         // web server port
         port: 9876,
 
@@ -59,9 +56,5 @@ module.exports = function(config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: ['Chrome'],
-
-
-        // Continuous Integration mode
-        // if true, Karma captures browsers, runs the tests and exits
     })
 };

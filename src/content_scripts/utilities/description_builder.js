@@ -1,4 +1,4 @@
-const DescriptionBuilder = {
+export default {
     build(learningTags, learningBody, description) {
         return `${(description || '')}\n
                 ${learningBody}

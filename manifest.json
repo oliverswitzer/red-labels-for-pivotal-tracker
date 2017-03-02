@@ -23,27 +23,7 @@
         "https://www.pivotaltracker.com/*"
       ],
       "js": [
-        "vendor/moment/moment.min.js",
-        "vendor/jquery/jquery-3.1.1.min.js",
-        "vendor/semantic-ui/dropdown.min.js",
-        "vendor/semantic-ui/modal.min.js",
-        "vendor/semantic-ui/dimmer.min.js",
-        "vendor/semantic-ui/transition.min.js",
-        "src/content_scripts/view/wwltw_modal.js",
-        "src/content_scripts/view/tagList.js",
-        "src/content_scripts/view/story_listener.js",
-        "src/content_scripts/utilities/description_builder.js",
-        "src/content_scripts/utilities/pivotal_tracker_api_client.js",
-        "src/content_scripts/utilities/project_id_provider.js",
-        "src/content_scripts/utilities/fetch_wrapper.js",
-        "src/content_scripts/utilities/date_wrapper.js",
-        "src/content_scripts/utilities/story_title_provider.js",
-        "src/content_scripts/utilities/analytics_wrapper.js",
-        "src/content_scripts/repositories/wwltw_repository.js",
-        "src/content_scripts/alarm_creator.js",
-        "src/content_scripts/use_cases/add_learning_to_story_description.js",
-        "src/content_scripts/use_cases/find_or_create_wwltw_story.js",
-        "src/content_scripts/main.js"
+        "bundle.js"
       ],
       "css": [
         "vendor/semantic-ui/button.min.css",

@@ -1,4 +1,6 @@
-class WWLTWRepository {
+import DescriptionBuilder from '../utilities/description_builder'
+
+export default class WWLTWRepository {
     constructor(trackerApiClient) {
         this.trackerApiClient = trackerApiClient;
     }
