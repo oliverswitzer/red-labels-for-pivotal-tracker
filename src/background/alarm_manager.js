@@ -7,9 +7,10 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
 });
 
 chrome.runtime.onMessage.addListener(
-    function(request) {
+    function(request, sender, callback) {
         if (isInFutureOrIsNow(request.setAlarm)) {
             chrome.alarms.create('reminder', {when: request.setAlarm});
+            callback({alarmReceived: request.setAlarm});
         }
     }
 );
