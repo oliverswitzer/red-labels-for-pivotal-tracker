@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "karma start --single-run",
-    "package": "./scripts/package.js",
+    "package": "npm run webpack && ./scripts/package.js",
     "deploy": "./scripts/deploy.js",
     "package_and_deploy": "npm run package | tail -n 1 | npm run deploy",
     "webpack": "webpack --progress --colors"
