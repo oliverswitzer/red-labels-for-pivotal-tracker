@@ -1,27 +1,67 @@
 // Saves options to chrome.storage
-let form = document.querySelector('form');
 function save_options(e) {
     e.preventDefault();
-    var trackerApiToken = document.getElementById('tracker-token').value;
+    let form = e.currentTarget;
+    let trackerApiToken = document.getElementById('tracker-token').value;
+
+    function openOrReload(tabs) {
+        if(tabs.length > 0) {
+            reloadProjectTabs(tabs, form);
+        } else {
+            openNewTrackerTab(form);
+        }
+    }
+
     chrome.storage.sync.set({
         trackerApiToken: trackerApiToken
     }, function() {
-        // Update status to let user know options were saved.
         form.classList.add('success');
-
-        setTimeout(function() {
-            window.location = "https://www.pivotaltracker.com/dashboard";
-        }, 1500);
+        getCurrentTrackerTabs(openOrReload);
     });
 }
 
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
 function restore_options() {
-    // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get('trackerApiToken', function(options) {
         document.getElementById('tracker-token').value = options.trackerApiToken || "";
     });
 }
-document.addEventListener('DOMContentLoaded', restore_options);
-form.addEventListener('submit', save_options);
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener('DOMContentLoaded', restore_options);
+    document.getElementById('token-form').addEventListener('submit', save_options);
+});
+
+
+function getCurrentTrackerTabs(callback) {
+    return chrome.tabs.query({
+        url: "*://www.pivotaltracker.com/*"
+    }, callback)
+}
+
+
+
+function openNewTrackerTab(form) {
+    form.classList.add("redirecting");
+    setTimeout(function() {
+        window.location = "https://www.pivotaltracker.com/dashboard";
+    }, 1500);
+}
+
+function reloadProjectTabs(allTrackerTabs, form) {
+    form.classList.add("reloading");
+    let projectRegex = /:\/\/www.pivotaltracker.com\/n\/projects/;
+
+    allTrackerTabs.forEach(function(tab) {
+        if (tab.url.match(projectRegex)) {
+            chrome.tabs.reload(tab.id);
+        }
+    });
+
+    setTimeout(closeCurrentTab, 1500);
+}
+
+function closeCurrentTab() {
+    chrome.tabs.getCurrent(function (tab) {
+        chrome.tabs.remove(tab.id)
+    });
+}
