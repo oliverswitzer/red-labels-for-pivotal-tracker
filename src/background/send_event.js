@@ -1,4 +1,4 @@
-const sendEvent = function (eventType) {
+export default (eventType) => {
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function () {
@@ -11,7 +11,7 @@ const sendEvent = function (eventType) {
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-92911260-1', 'auto');
+    ga('create', process.env.DEVELOPMENT_GA_ID, 'auto');
     ga('set', 'checkProtocolTask', null);
     ga('require', 'displayfeatures');
     ga('send', 'event', 'modal', eventType);

@@ -23,7 +23,7 @@
         "https://www.pivotaltracker.com/n/projects*"
       ],
       "js": [
-        "bundle.js"
+        "content_scripts.bundle.js"
       ],
       "css": [
         "vendor/semantic-ui/button.min.css",
@@ -46,10 +46,7 @@
   ],
   "background": {
     "scripts": [
-      "src/background/event_listener.js",
-      "src/background/first_run.js",
-      "src/background/alarm_listener.js",
-      "src/background/send_event.js"
+      "background_scripts.bundle.js"
     ]
   }
 }
