@@ -1,4 +1,4 @@
-import DateWrapper from './date_wrapper'
+import NextFridayProvider from "./next_friday_provider";
 
 export default function (chrome) {
     function logAlarmReceived (response) {
@@ -6,6 +6,6 @@ export default function (chrome) {
     }
 
     chrome.runtime.sendMessage({
-        setAlarm: new DateWrapper().nextFridayAtThree().valueOf()
+        setAlarm: NextFridayProvider.millisecondsDate()
     }, logAlarmReceived);
 }

@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener(
     function (request, sender, callback) {
-        if (request.setAlarm && isInFutureOrIsNow(request.setAlarm)) {
+        if (request.setAlarm) {
             chrome.alarms.create('reminder', {when: request.setAlarm});
             callback({alarmReceived: request.setAlarm});
             return;
@@ -10,7 +10,3 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
-
-function isInFutureOrIsNow(time) {
-    return time >= Date.now();
-}

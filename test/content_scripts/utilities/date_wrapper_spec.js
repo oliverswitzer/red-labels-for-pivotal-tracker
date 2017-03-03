@@ -1,37 +1,41 @@
-import DateWrapper from '../../../src/content_scripts/utilities/date_wrapper'
+import NextFridayProvider from "../../../src/content_scripts/utilities/next_friday_provider";
 
-describe('DateWrapper', function () {
+describe('NextFridayProvider', function () {
 
-    let dateWrapper;
+    const fridayAtFour = new Date(2017, 2, 3, 16, 0, 0);
 
     beforeEach(function() {
         jasmine.clock().install();
-        dateWrapper = new DateWrapper();
     });
 
     afterEach(function() {
         jasmine.clock().uninstall();
     });
 
-    describe('nextFriday', function () {
-        it('returns the date for the Friday of the current week', function () {
-            const thursday = new Date(2017, 2, 2);
-            jasmine.clock().mockDate(thursday);
-
-            const friday = new Date(2017, 2, 3);
-            expect(dateWrapper.nextFriday().year()).toEqual(friday.getFullYear());
-            expect(dateWrapper.nextFriday().month()).toEqual(friday.getMonth());
-            expect(dateWrapper.nextFriday().day()).toEqual(friday.getDay());
-        });
-    });
-
-    describe('nextFridayAtThree', function () {
+    describe('millisecondsDate', function () {
         it('returns the date for the Friday of the current week at 3:00pm', function () {
             const thursday = new Date(2017, 2, 2);
             jasmine.clock().mockDate(thursday);
 
-            const fridayAtThree = new Date(2017, 2, 3, 15, 0, 0);
-            expect(dateWrapper.nextFridayAtThree()).toEqual(fridayAtThree);
+            const fridayAtThree = new Date(2017, 2, 3, 15, 0, 0).valueOf();
+            expect(NextFridayProvider.millisecondsDate()).toEqual(fridayAtThree);
+        });
+
+        describe('when it is after next Friday at 3', function () {
+           it('returns the date for the following Friday at 3', function () {
+                jasmine.clock().mockDate(fridayAtFour);
+
+                const nextFridayAtThree = new Date(2017, 2, 10, 15, 0, 0).valueOf();
+                expect(NextFridayProvider.millisecondsDate()).toEqual(nextFridayAtThree);
+           });
+        });
+    });
+
+    describe('formattedDate', function () {
+        it('returns the month / day for next Friday', function () {
+            jasmine.clock().mockDate(fridayAtFour);
+
+            expect(NextFridayProvider.formattedDate()).toEqual('3/10');
         });
     });
 });
