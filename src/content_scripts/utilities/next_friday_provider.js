@@ -14,7 +14,7 @@ const momentNextFriday = () => {
     let nextFriday = moment()
         .endOf('week')
         .subtract(1, 'day')
-        .hour(15)
+        .hour(14)
         .minutes(0)
         .seconds(0)
         .milliseconds(0);
