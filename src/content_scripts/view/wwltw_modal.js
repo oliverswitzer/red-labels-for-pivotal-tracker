@@ -7,7 +7,7 @@ $.fn.dimmer = require('semantic-ui-dimmer');
 
 export default class WWLTWModal {
     constructor() {
-        let modalContainer = `
+        let modalContent = `
         <div class="ui modal">
             <div class="header ui grid">
                 <div class="row">
@@ -22,7 +22,7 @@ export default class WWLTWModal {
                         <div class="one wide column"></div>
                         <div class="fourteen wide column">
                             <div class="field">
-                                <label for="learning-body">Body (markdown supported)</label>
+                                <label for="learning-body">Content (markdown supported)</label>
                                 <textarea name="learning-body" id="learning-body"></textarea>
                             </div>
                             <div class="field">
@@ -41,7 +41,11 @@ export default class WWLTWModal {
             </div>
         </div>`;
 
-        this.addElementToBody(modalContainer);
+        let modalContainer = this.addElementToBody(modalContent);
+        let learningBody = modalContainer.querySelector("#learning-body");
+        learningBody.placeholder = "### A Header for your Learning (recommended)\n\n";
+        learningBody.placeholder += "Body of learning. You can use all the markdown you want\n\n";
+        learningBody.placeholder += "```\n    codeBlocks.areSupported();\n```";
     }
 
     populateTags() {
@@ -90,8 +94,9 @@ export default class WWLTWModal {
     };
 
     addElementToBody(innerHtml) {
-        let modalContainer = document.createElement("div");
-        modalContainer.innerHTML = innerHtml;
-        document.querySelector('body').appendChild(modalContainer);
+        let elementContainer = document.createElement("div");
+        elementContainer.innerHTML = innerHtml;
+        document.querySelector('body').appendChild(elementContainer);
+        return elementContainer;
     }
 }
