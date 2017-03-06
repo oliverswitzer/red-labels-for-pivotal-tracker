@@ -55,7 +55,9 @@ export default class WWLTWModal {
     }
 
     initialize() {
-        $('.ui.fluid.dropdown').dropdown();
+        $('.ui.fluid.dropdown').dropdown({
+            allowAdditions: true
+        });
 
         this.wwltwForm = document.querySelector("#wwltw-form");
         this.learningBody = document.querySelector("#learning-body");
@@ -64,6 +66,9 @@ export default class WWLTWModal {
                 this.clearForm()
             }
         });
+
+        this._preventEnteringCustomTagsFromSubmitting();
+
         return this;
     }
 
@@ -98,5 +103,14 @@ export default class WWLTWModal {
         elementContainer.innerHTML = innerHtml;
         document.querySelector('body').appendChild(elementContainer);
         return elementContainer;
+    }
+
+    _preventEnteringCustomTagsFromSubmitting() {
+        $(this.wwltwForm).on('keydown', function (e) {
+            const ENTER = 13;
+            if (e.which === ENTER) {
+                e.preventDefault();
+            }
+        });
     }
 }
