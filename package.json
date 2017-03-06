@@ -11,6 +11,7 @@
     "package": "./scripts/update_environment_to_production.js && npm run webpack && ./scripts/package.js && ./scripts/reset_environment_to_development.js",
     "deploy": "./scripts/deploy.js",
     "package_and_deploy": "npm run package | tail -n 1 | npm run deploy",
+    "watch": "webpack --progress --colors --watch",
     "webpack": "webpack --progress --colors",
     "karma": "karma start"
   },

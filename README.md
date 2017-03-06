@@ -45,3 +45,9 @@ Before you load your chrome extension into the browser, make sure that you run:
 ```$xslt
 $ npm run weback
 ```
+
+or to run it to continually watch/package changes:
+
+```
+$ npm run watch
+```
