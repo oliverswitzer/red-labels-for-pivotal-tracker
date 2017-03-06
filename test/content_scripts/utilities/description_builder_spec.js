@@ -9,10 +9,7 @@ describe('DescriptionBuilder', function () {
             const originalDescription = 'someone else learned some stuff';
             const newDescription = DescriptionBuilder.build(tags, body, originalDescription);
 
-            expect(newDescription).toEqual(`someone else learned some stuff\n
-                I learned some stuff
-                _Tags: tag, tag, tag_\n\n
-                ---`);
+            expect(newDescription).toEqual("someone else learned some stuff\n\nI learned some stuff\n\n_tag, tag, tag_");
         });
     });
 
@@ -20,10 +17,15 @@ describe('DescriptionBuilder', function () {
         it('returns a new properly formatted description', function () {
             const newDescription = DescriptionBuilder.build(tags, body);
 
-            expect(newDescription).toEqual(`\n
-                I learned some stuff
-                _Tags: tag, tag, tag_\n\n
-                ---`);
+            expect(newDescription).toEqual("I learned some stuff\n\n_tag, tag, tag_");
         });
     });
+
+    describe('when no tags are provided', function () {
+        it('excludes tags', function () {
+            const newDescription = DescriptionBuilder.build('', body);
+
+            expect(newDescription).toEqual("I learned some stuff");
+        })
+    })
 });
