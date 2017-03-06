@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "karma start --single-run",
-    "package": "npm run webpack && ./scripts/package.js",
+    "package": "./scripts/update_environment_to_production.js && npm run webpack && ./scripts/package.js && ./scripts/reset_environment_to_development.js",
     "deploy": "./scripts/deploy.js",
     "package_and_deploy": "npm run package | tail -n 1 | npm run deploy",
     "webpack": "webpack --progress --colors",
@@ -26,6 +26,8 @@
   "homepage": "https://github.com/oliverswitzer/wwltw-for-pivotal-tracker#readme",
   "devDependencies": {
     "child_process": "^1.0.2",
+    "dotenv-webpack": "^1.4.2",
+    "fs-promise": "^2.0.0",
     "get-stdin": "^5.0.1",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",

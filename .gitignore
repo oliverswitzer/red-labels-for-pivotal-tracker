@@ -13,4 +13,8 @@ node_modules
 .idea
 **/.DS_Store
 dist/
-bundle.js
+
+*.bundle.js
+
+*.env
+!template.env
