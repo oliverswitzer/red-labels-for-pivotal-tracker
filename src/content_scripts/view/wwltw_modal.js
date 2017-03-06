@@ -26,7 +26,7 @@ export default class WWLTWModal {
                                 <textarea name="learning-body" id="learning-body"></textarea>
                             </div>
                             <div class="field">
-                                <label for="learning-tags">Tags</label>
+                                <label for="learning-tags">Tags (optional)</label>
                                 <select name="tags" multiple="" id="learning-tags" class="ui fluid search dropdown">
                                     <option value="">e.g. java, rails, tdd</option>
                                     ${this.populateTags()}
