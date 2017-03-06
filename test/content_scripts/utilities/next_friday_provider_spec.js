@@ -13,19 +13,21 @@ describe('NextFridayProvider', function () {
     });
 
     describe('millisecondsDate', function () {
-        it('returns the date for the Friday of the current week at 3:00pm', function () {
+        it('returns the date for the Friday of the current week at 2:30pm', function () {
             const thursday = new Date(2017, 2, 2);
             jasmine.clock().mockDate(thursday);
 
-            const fridayAtThree = new Date(2017, 2, 3, 15, 0, 0).valueOf();
+            const fridayAtThree = new Date(2017, 2, 3, 14, 30, 0).valueOf();
+
+            debugger;
             expect(NextFridayProvider.millisecondsDate()).toEqual(fridayAtThree);
         });
 
-        describe('when it is after next Friday at 3', function () {
-           it('returns the date for the following Friday at 3', function () {
+        describe('when it is after next Friday at 2:30pm', function () {
+           it('returns the date for the following Friday at 2:30pm', function () {
                 jasmine.clock().mockDate(fridayAtFour);
 
-                const nextFridayAtThree = new Date(2017, 2, 10, 15, 0, 0).valueOf();
+                const nextFridayAtThree = new Date(2017, 2, 10, 14, 30, 0).valueOf();
                 expect(NextFridayProvider.millisecondsDate()).toEqual(nextFridayAtThree);
            });
         });
