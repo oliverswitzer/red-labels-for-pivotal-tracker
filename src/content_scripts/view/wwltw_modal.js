@@ -108,7 +108,7 @@ export default class WWLTWModal {
     _preventEnteringCustomTagsFromSubmitting() {
         $(this.wwltwForm).on('keydown', function (e) {
             const ENTER = 13;
-            if (e.which === ENTER) {
+            if (e.target.classList.contains('search') && e.which === ENTER) {
                 e.preventDefault();
             }
         });
