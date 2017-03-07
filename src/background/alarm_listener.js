@@ -1,8 +1,10 @@
 export default () => {
     chrome.alarms.onAlarm.addListener(function (alarm) {
         if (alarm.name === "reminder") {
+
             runIfTrackerOpen(function () {
-                alert("Hey y'all, it's time to send out your WWLTW email!");
+                alert(`Hey y'all, it's time to send out your WWLTW email!\n\n` +
+                `Head on over to Pivotal Tracker, open up your "WWLTW for the week of ${moment().format('M/D')}" chore and hit Finish to generate the email`);
             });
         }
     });
