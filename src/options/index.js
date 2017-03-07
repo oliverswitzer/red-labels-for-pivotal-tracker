@@ -41,7 +41,7 @@ function reloadProjectTabs(allTrackerTabs) {
 
     allTrackerTabs.forEach(function(tab) {
         if (tab.url.match(projectRegex)) {
-            chrome.tabs.reload(tab.id);
+            chrome.tabs.discard(tab.id);
         }
     });
 }
