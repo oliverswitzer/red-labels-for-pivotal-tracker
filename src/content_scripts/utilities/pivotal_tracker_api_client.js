@@ -40,7 +40,15 @@ export default class PivotalTrackerApiClient {
                 body: JSON.stringify({description})
             })
             .then(response => response.json());
+    }
 
+    getProject(projectId) {
+        return this.fetchWrapper(
+            this._generateApiUrlBase(projectId), {
+                method: 'GET',
+                headers: this._headers(),
+            }
+        ).then(response => response.json());
     }
 
     _headers() {

@@ -27,7 +27,7 @@
         "https://www.pivotaltracker.com/n/projects*"
       ],
       "js": [
-        "content_scripts.bundle.js"
+        "dist/bundles/pivotal_tracker_content_scripts.bundle.js"
       ],
       "css": [
         "vendor/semantic-ui/button.min.css",
@@ -46,11 +46,21 @@
         "css/inject/inject.css"
       ],
       "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/mail/u/0/?*trackerProjectId=*"
+      ],
+      "js": [
+        "dist/bundles/gmail_content_scripts.bundle.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
     }
   ],
   "background": {
     "scripts": [
-      "background_scripts.bundle.js"
+      "dist/bundles/background_scripts.bundle.js"
     ]
   }
 }

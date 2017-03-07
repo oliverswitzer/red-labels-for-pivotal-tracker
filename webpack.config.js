@@ -5,11 +5,12 @@ module.exports = {
         new Dotenv()
     ],
     entry: {
-        content_scripts: './src/content_scripts/main.js',
+        pivotal_tracker_content_scripts: './src/content_scripts/pivotal_tracker/main.js',
+        gmail_content_scripts: './src/content_scripts/gmail/main.js',
         background_scripts: './src/background/main.js'
     },
     output: {
-        path: __dirname,
+        path: `${__dirname}/dist/bundles/`,
         filename: '[name].bundle.js'
     },
     module: {

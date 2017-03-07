@@ -80,6 +80,23 @@ describe('PivotalTrackerApiClient', function () {
         });
     });
 
+    describe('getProject', function () {
+        const projectId = 'some-project-id';
+
+        beforeEach(function () {
+            apiClient.getProject(projectId);
+        });
+
+        it('GETs to expected endpoint', function () {
+            const url = new URL(fetchWrapper.calls.mostRecent().args[0]);
+            const fetchConfig = fetchWrapper.calls.mostRecent().args[1];
+
+            expect(fetchConfig).toEqual(jasmine.objectContaining({ method: 'GET' }));
+            expect(url.origin).toEqual(apiClient.TRACKER_BASE_URL);
+            expect(url.pathname).toEqual(`/services/v5/projects/${projectId}`);
+        });
+    });
+
     function verifyItAddsCorrectHeaders() {
         const headers = fetchWrapper.calls.mostRecent().args[1].headers;
         expect(headers.get('Content-Type')).toEqual('application/json');

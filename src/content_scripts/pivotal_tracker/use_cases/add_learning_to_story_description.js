@@ -1,5 +1,5 @@
-import ProjectIdProvider from '../utilities/project_id_provider'
-import StoryTitleProvider from '../utilities/story_title_provider'
+import ProjectIdProvider from '../../utilities/project_id_provider'
+import StoryTitleProvider from '../../utilities/story_title_provider'
 
 export default class AddLearningToStoryDescription {
     constructor(wwltwRepository) {

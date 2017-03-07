@@ -1,7 +1,7 @@
-import WWLTWRepository from '../../../src/content_scripts/repositories/wwltw_repository'
-import FindOrCreateWWLTWStory from '../../../src/content_scripts/use_cases/find_or_create_wwltw_story'
-import ProjectIdProvider from '../../../src/content_scripts/utilities/project_id_provider'
-import StoryTitleProvider from '../../../src/content_scripts/utilities/story_title_provider'
+import WWLTWRepository from '../../../../src/content_scripts/repositories/wwltw_repository'
+import FindOrCreateWWLTWStory from '../../../../src/content_scripts/pivotal_tracker/use_cases/find_or_create_wwltw_story'
+import ProjectIdProvider from '../../../../src/content_scripts/utilities/project_id_provider'
+import StoryTitleProvider from '../../../../src/content_scripts/utilities/story_title_provider'
 
 describe('findOrCreateWWLTWStory', function () {
     let wwltwRepositorySpy;

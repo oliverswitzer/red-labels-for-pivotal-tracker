@@ -20,4 +20,8 @@ export default class WWLTWRepository {
         const newDescription = DescriptionBuilder.build(learningTags, learningBody, story.description);
         return this.trackerApiClient.updateStory(projectId, story.id, newDescription);
     }
+
+    findProject(projectId) {
+        return this.trackerApiClient.getProject(projectId);
+    }
 }

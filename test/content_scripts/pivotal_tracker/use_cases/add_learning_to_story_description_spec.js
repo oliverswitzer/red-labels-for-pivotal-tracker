@@ -1,7 +1,7 @@
-import AddLearningToStoryDescription from '../../../src/content_scripts/use_cases/add_learning_to_story_description'
-import WWLTWRepository from '../../../src/content_scripts/repositories/wwltw_repository';
-import StoryTitleProvider from '../../../src/content_scripts/utilities/story_title_provider';
-import ProjectIdProvider from '../../../src/content_scripts/utilities/project_id_provider';
+import AddLearningToStoryDescription from '../../../../src/content_scripts/pivotal_tracker/use_cases/add_learning_to_story_description'
+import WWLTWRepository from '../../../../src/content_scripts/repositories/wwltw_repository';
+import StoryTitleProvider from '../../../../src/content_scripts/utilities/story_title_provider';
+import ProjectIdProvider from '../../../../src/content_scripts/utilities/project_id_provider';
 
 describe('AddLearningToStoryDescription', function () {
     let wwltwRepositorySpy;
@@ -21,7 +21,7 @@ describe('AddLearningToStoryDescription', function () {
         spyOn(StoryTitleProvider, 'currentStoryTitle').and.returnValue(storyTitle);
         spyOn(ProjectIdProvider, 'getProjectId').and.returnValue(projectId);
 
-        const useCase = new AddLearningToStoryDescription(wwltwRepositorySpy)
+        const useCase = new AddLearningToStoryDescription(wwltwRepositorySpy);
         execute = useCase.execute;
     });
 
