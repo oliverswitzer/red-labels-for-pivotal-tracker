@@ -18,24 +18,25 @@ function setProjectNameAndDescription(wwltwRepository) {
 
     let storyPromise = wwltwRepository.findByTitle(projectId, storyTitle);
     let projectPromise = wwltwRepository.findProject(projectId);
+    let pageHasLoadedPromise = waitForNoMoreNodeInsertions();
 
-    Promise.all([storyPromise, projectPromise, pageLoaded()]).then(values => {
+    Promise.all([storyPromise, projectPromise, pageHasLoadedPromise]).then(values => {
         populateEmail(values);
     });
 }
 
-function pageLoaded() {
+function waitForNoMoreNodeInsertions() {
     return new Promise(function(resolve, _reject) {
-        let zGbl_PageChangedByAJAX_Timer = -1;
-        document.body.addEventListener ('DOMNodeInserted', resetTimeout, false);
+        let timerId = -1;
+        document.body.addEventListener('DOMNodeInserted', keepWaiting, false);
 
-        function resetTimeout() {
-            clearTimeout (zGbl_PageChangedByAJAX_Timer);
-            zGbl_PageChangedByAJAX_Timer = setTimeout (function() { handlePageChange(); }, 750);
+        function keepWaiting() {
+            clearTimeout(timerId);
+            timerId = setTimeout(function() { pageHasLoaded(); }, 750);
         }
 
-        function handlePageChange() {
-            document.body.removeEventListener ('DOMNodeInserted', resetTimeout, false);
+        function pageHasLoaded() {
+            document.body.removeEventListener('DOMNodeInserted', keepWaiting, false);
             resolve();
         }
     });
