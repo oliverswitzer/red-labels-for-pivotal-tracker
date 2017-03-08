@@ -35,7 +35,8 @@ function openGmail (storyTitle) {
         fs: 1,
         tf: 1,
         to: 'wwltw@pivotal.io',
-        su: 'WWLTW'
+        su: 'loading...',
+        body: 'loading...'
     };
 
     Object.keys(params).forEach(function (paramKey) {

@@ -1,36 +1,50 @@
-import $ from 'jquery';
 import fetchWrapper from '../utilities/fetch_wrapper'
 import PivotalTrackerApiClient from '../utilities/pivotal_tracker_api_client';
 import WWLTWRepository from '../repositories/wwltw_repository';
 
-$(function () {
-    chrome.storage.sync.get('trackerApiToken', function (options) {
-        let wwltwRepository = new WWLTWRepository(new PivotalTrackerApiClient(options.trackerApiToken, fetchWrapper));
+const GMAIL_IDS = {subject: ':oq', body: ':np'};
 
-        let intervalId = setInterval(function () {
-            if (gmailLoaded()) {
-                clearInterval(intervalId);
-                populateEmail(wwltwRepository);
-            }
-        }, 500);
-    });
-
+chrome.storage.sync.get('trackerApiToken', function (options) {
+    const wwltwRepository = new WWLTWRepository(
+        new PivotalTrackerApiClient(options.trackerApiToken, fetchWrapper)
+    );
+    setProjectNameAndDescription(wwltwRepository);
 });
-function populateEmail(wwltwRepository) {
-    let searchParams = new URL(window.location.href).searchParams;
 
-    const title = searchParams.get('storyTitle');
-    const projectId = searchParams.get('trackerProjectId');
+function setProjectNameAndDescription(wwltwRepository) {
+    const searchParams = new URL(window.location.href).searchParams;
+    let projectId = searchParams.get('trackerProjectId');
+    let storyTitle = searchParams.get('storyTitle');
 
-    wwltwRepository.findByTitle(projectId, title).then(function (story) {
-        document.getElementById(':np').innerText = story[0].description;
-    });
+    let storyPromise = wwltwRepository.findByTitle(projectId, storyTitle);
+    let projectPromise = wwltwRepository.findProject(projectId);
 
-    wwltwRepository.findProject(projectId).then(function (project) {
-        document.getElementById(':oq').value = `[WWLTW] ${project.name}`;
+    Promise.all([storyPromise, projectPromise, pageLoaded()]).then(values => {
+        populateEmail(values);
     });
 }
 
-function gmailLoaded() {
-    return document.getElementById(':p0');
+function pageLoaded() {
+    return new Promise(function(resolve, _reject) {
+        let zGbl_PageChangedByAJAX_Timer = -1;
+        document.body.addEventListener ('DOMNodeInserted', resetTimeout, false);
+
+        function resetTimeout() {
+            clearTimeout (zGbl_PageChangedByAJAX_Timer);
+            zGbl_PageChangedByAJAX_Timer = setTimeout (function() { handlePageChange(); }, 750);
+        }
+
+        function handlePageChange() {
+            document.body.removeEventListener ('DOMNodeInserted', resetTimeout, false);
+            resolve();
+        }
+    });
+}
+
+function populateEmail(values) {
+    const projectName = values[1].name;
+    const description = values[0][0].description;
+
+    document.getElementById(GMAIL_IDS.subject).value = `[WWLTW] ${projectName}`;
+    document.getElementById(GMAIL_IDS.body).innerText = description;
 }
