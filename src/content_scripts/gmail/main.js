@@ -1,8 +1,10 @@
 import fetchWrapper from '../utilities/fetch_wrapper'
 import PivotalTrackerApiClient from '../utilities/pivotal_tracker_api_client';
 import WWLTWRepository from '../repositories/wwltw_repository';
+import showdown from 'showdown';
 
-const GMAIL_IDS = {subject: ':oq', body: ':np'};
+const GMAIL_IDS = {subject: ':oq', body: ':np', nameOfEmail: ':on'};
+const markdownConverter = new showdown.Converter();
 
 chrome.storage.sync.get('trackerApiToken', function (options) {
     const wwltwRepository = new WWLTWRepository(
@@ -26,13 +28,15 @@ function setProjectNameAndDescription(wwltwRepository) {
 }
 
 function waitForNoMoreNodeInsertions() {
-    return new Promise(function(resolve, _reject) {
+    return new Promise(function (resolve, _reject) {
         let timerId = -1;
         document.body.addEventListener('DOMNodeInserted', keepWaiting, false);
 
         function keepWaiting() {
             clearTimeout(timerId);
-            timerId = setTimeout(function() { pageHasLoaded(); }, 750);
+            timerId = setTimeout(function () {
+                pageHasLoaded();
+            }, 750);
         }
 
         function pageHasLoaded() {
@@ -46,6 +50,12 @@ function populateEmail(values) {
     const projectName = values[1].name;
     const description = values[0][0].description;
 
-    document.getElementById(GMAIL_IDS.subject).value = `[WWLTW] ${projectName}`;
-    document.getElementById(GMAIL_IDS.body).innerText = description;
+    let subject = `[WWLTW] ${projectName}`;
+    document.getElementById(GMAIL_IDS.subject).value = subject;
+    document.getElementById(GMAIL_IDS.nameOfEmail).innerText = subject;
+    document.getElementById(GMAIL_IDS.body).innerHTML = convertToHtml(description);
+}
+
+function convertToHtml(markdownInput) {
+    return markdownConverter.makeHtml(markdownInput);
 }
