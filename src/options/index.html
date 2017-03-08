@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WWLTW Options</title>
+    <title>WWLTW Introduction</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
     <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 55px;
+        }
         h2 {
             text-align: center;
         }
+
         a {
             color: #00ae9e;
         }
+
         .ui.success.message {
             text-align: center;
             background-color: #EDFFD9;
@@ -17,6 +23,7 @@
             box-shadow: 0 0 0 1px #4D8013 inset, 0 0 0 0 transparent;
             line-height: 1em;
         }
+
         .ui.button, .ui.button:hover, .ui.button:focus, .ui.button:active {
             background: #138078;
             color: #FFFFFF;
@@ -25,91 +32,95 @@
         #save {
             margin-top: 10px;
         }
+
         #status-wrapper {
             margin-top: 16px;
         }
+
         .number-icon {
+            font-size: 2em;
+            margin: 0 auto;
             background-color: #138078;
             color: #FFFFFF;
             border-radius: 50%;
-            height: 50px;
-            width: 50px;
+            height: 100px;
+            width: 100px;
             text-align: center;
-            line-height: 50px;
+            line-height: 100px;
         }
 
-        .row.item {
-            margin-top: 40px;
+        .how-to {
+            text-align: center;
+        }
+
+        .how-to img {
+            margin: 0 auto;
+        }
+
+        .get-started {
+
         }
     </style>
 </head>
 <body>
-<div class="ui grid container" style="margin-top:50px;">
-    <div class="three wide column"></div>
-    <div class="ten wide column">
-        <h2>What We Learned This Week for Pivotal Tracker</h2>
+<div class="ui grid" style="margin-top:50px;">
+    <div class="row">
+        <div class="one wide column"></div>
+        <div class="fourteen wide column">
+            <h1>What We Learned This Week for Pivotal Tracker</h1>
 
-        <h3>How to use the extension:</h3>
-        <div class="ui grid">
-            <div class="row item">
-                <div class="two wide column">
-                    <div class="number-icon">1</div>
+            <div class="ui three column grid">
+                <div class="column">
+                    <div class="how-to">
+                        <div class="number-icon">1</div>
+                        <h2>Finish a story and enter a learning.</h2>
+                        <img src="/src/options/create-a-learning.gif" class="ui wireframe image rounded how-to">
+                    </div>
                 </div>
-                <div class="six wide column"><h2>Enter Pivotal Tracker API token</h2></div>
-                <div class="two wide column"><i class="arrow right icon huge"></i></div>
-                <div class="six wide column"><h2>WWLTW Chore in your icebox</h2></div>
+                <div class="column">
+                    <div class="how-to">
+                        <div class="number-icon">2</div>
+                        <h2>Adds the learning to an auto-generated chore for that week.</h2>
+                        <img src="/src/options/add-it-to-story.gif" class="ui wireframe image rounded how-to">
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="how-to">
+                        <div class="number-icon">3</div>
+                        <h2>Finish the chore to compose an email.</h2>
+
+                        <img src="/src/options/send-the-email.gif" class="ui wireframe image rounded how-to">
+                    </div>
+                </div>
             </div>
-            <div class="row">
-                <div class="two wide column"></div>
-                <div class="fourteen wide column">
-                    <p>The WWLTW for Pivotal Tracker extension uses your Pivotal Tracker API token to create a WWLTW chore for you each week at the top of the icebox. This chore is where we'll help you keep track of this week's learnings. You can find your API token <a href="https://www.pivotaltracker.com/profile" target="_blank">right here on your Tracker user profile</a>.</p>
-                    <form id="token-form" class="ui form">
-                        <div class="ui grid">
-                            <div class="row">
-                                <div class="four wide column"></div>
-                                <div class="eight wide column">
-                                    <label for="tracker-token">API token</label>
-                                    <input type="text" id="tracker-token"/>
-                                    <button id="save" class="ui submit button right floated">Save token</button>
-                                </div>
-                                <div class="four wide column">
-                                    <div id="status-wrapper" class="ui success message">
-                                        <div id="status">Token saved</div>
-                                    </div>
-                                </div>
+        </div>
+    </div>
+
+    <div class="row centered">
+        <h2>To get started, we need your Pivotal Tracker token.</h2>
+    </div>
+    <div class="row centered">
+        <h4>You can find your token at the bottom of <a href="https://www.pivotaltracker.com/profile">your profile</a>. We only use it to make new WWLTW chores every week.</h4>
+    </div>
+    <div class="row centered">
+        <div class="five wide column">
+            <form id="token-form" class="ui form">
+                <div class="ui grid">
+                    <div class="row">
+                        <div class="four wide column"></div>
+                        <div class="eight wide column">
+                            <label for="tracker-token">API token</label>
+                            <input type="text" id="tracker-token"/>
+                            <button id="save" class="ui submit button right floated">Save token</button>
+                        </div>
+                        <div class="four wide column">
+                            <div id="status-wrapper" class="ui success message">
+                                <div id="status">Token saved</div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="row item">
-                <div class="two wide column">
-                    <div class="number-icon">2</div>
-                </div>
-                <div class="six wide column"><h2>Finish a project story</h2></div>
-                <div class="two wide column"><i class="arrow right icon huge"></i></div>
-                <div class="six wide column"><h2>Enter a learning</h2></div>
-            </div>
-            <div class="row">
-                <div class="two wide column"></div>
-                <div class="fourteen wide column">
-                    <p>Saving learnings all week means no more scrambling to remember them on Friday. As you "Finish" your Pivotal Tracker stories throughout the week, the extension will prompt you to record what you learned this week. We'll save your learnings for you in the weekly chore.</p>
-                </div>
-            </div>
-            <div class="row item">
-                <div class="two wide column">
-                    <div class="number-icon">3</div>
-                </div>
-                <div class="six wide column"><h2>Finish the WWLTW story</h2></div>
-                <div class="two wide column"><i class="arrow right icon huge"></i></div>
-                <div class="six wide column"><h2>Autogenerate WWLTW email</h2></div>
-            </div>
-            <div class="row">
-                <div class="two wide column"></div>
-                <div class="fourteen wide column">
-                    <p>On Friday afternoon, the extension will ring a little alarm to remind you to share your learnings out with the WWLTW Google Group. Simply "Finish" the week's WWLTW chore and we'll craft your email in a new tab for you. Don't worry, you'll still have plenty of opportunity to polish, format and add a cute signature before the email gets sent.</p>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
