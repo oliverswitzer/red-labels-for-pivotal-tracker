@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/semantic.min.js"></script>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/semantic.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/reset.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/site.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/container.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/grid.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/header.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/image.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/menu.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/divider.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/segment.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/button.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/list.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/icon.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/components/transition.css">
+    <script>
+
+        $(document)
+            .ready(function() {
+
+                // fix menu when passed
+                $('.masthead')
+                    .visibility({
+                        once: false,
+                        onBottomPassed: function() {
+                            $('.fixed.menu').transition('fade in');
+                        },
+                        onBottomPassedReverse: function() {
+                            $('.fixed.menu').transition('fade out');
+                        }
+                    });
+
+                // create sidebar and attach to menu open
+                $('.ui.sidebar')
+                    .sidebar('attach events', '.toc.item');
+
+            });
+
+    </script>
+</head>
+<body class="pushable" cz-shortcut-listen="true">
+
+
+<!-- Page Contents -->
+<div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui text container">
+            <h1 class="ui inverted header">
+                WWLTW Chrome Plugin
+            </h1>
+            <h2>A simple tool to help you remember what you learned as you work.</h2>
+            <a href="https://chrome.google.com/webstore/detail/what-we-learned-this-week/hhjembdipbpakpfcgekpjccdajjhpoan"
+               target="_blank">
+                <div class="ui huge primary button">Download it<i class="right arrow icon"></i></div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="ui vertical stripe segment">
+        <div class="ui middle aligned stackable grid container">
+            <div class="row"></div>
+            <div class="row">
+                <div class="eight wide column">
+                    <h2 class="ui header">No longer spend your Friday afternoon in a frantic state</h2>
+                    <p>Have you been asking yourself <em>"what DID I learn this week?"</em>. This extension will help
+                        you
+                        remember to write down your week's learnings throughout the week as you finish your Pivotal
+                        Tracker stories.</p>
+                </div>
+                <div class="six wide right floated column">
+                    <img src="work-stress.jpg" class="ui large bordered rounded image">
+                </div>
+            </div>
+            <div class="row">
+                <div class="six wide left floated column">
+                    <img src="work-stress.jpg" class="ui large bordered rounded image">
+                </div>
+                <div class="eight wide column">
+                    <h2 class="ui header">Take advantage of using Markdown in your emails</h2>
+                    <p>No need to download special plugins to use markdown in your emails. Just "Finish" your WWLTW
+                        chore, and the plugin will auto-generate an email with your learnings, rendered in
+                        language-specific markdown</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
