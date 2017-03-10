@@ -1,10 +1,9 @@
 import fetchWrapper from '../utilities/fetch_wrapper'
 import PivotalTrackerApiClient from '../utilities/pivotal_tracker_api_client';
 import WWLTWRepository from '../repositories/wwltw_repository';
-import showdown from 'showdown';
+import MarkdownTranslator from './markdown_translator';
 
 const GMAIL_IDS = {subject: ':oq', body: ':np', nameOfEmail: ':on'};
-const markdownConverter = new showdown.Converter();
 
 chrome.storage.sync.get('trackerApiToken', function (options) {
     const wwltwRepository = new WWLTWRepository(
@@ -56,6 +55,7 @@ function populateEmail(values) {
     document.getElementById(GMAIL_IDS.body).innerHTML = convertToHtml(description);
 }
 
+
 function convertToHtml(markdownInput) {
-    return markdownConverter.makeHtml(markdownInput);
+    return MarkdownTranslator.translate(markdownInput);
 }

@@ -38,6 +38,7 @@
     "karma-jasmine": "^1.1.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.2",
+    "marked": "^0.3.6",
     "node-libcurl": "^1.1.0",
     "refresh-token": "^0.1.1",
     "webpack": "^2.2.1"
