@@ -13,7 +13,8 @@ fs.readFile(manifestFile, 'UTF-8', function (err, data) {
     var manifest = JSON.parse(data);
     var fileList = [
         '_locales/**/*',
-        'icons/*'
+        'icons/*',
+        'src/options/**/*'
     ];
 
     if(process.env.CIRCLE_BUILD_NUM) {
@@ -23,6 +24,7 @@ fs.readFile(manifestFile, 'UTF-8', function (err, data) {
     jsonfile.writeFile('dist/' + manifestFile, manifest);
 
     fileList.push(manifest.options_page);
+    fileList.push(manifest.browser_action.default_popup);
     fileList.push('src/options/index.js');
 
     manifest.content_scripts.forEach(function (scripts) {
