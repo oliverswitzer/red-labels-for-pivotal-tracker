@@ -3,7 +3,7 @@
   "version": "1.4.0",
   "version_name": "1.4.0",
   "manifest_version": 2,
-  "author": "Oliver Switzer, Sai To Yeung, Shawna Mattison",
+  "author": "Oliver Switzer, Katie Hoffman, Shawna Mattison",
   "description": "A better workflow for writing What We Learned This Week learnings",
   "homepage_url": "https://github.com/oliverswitzer/red-labels-for-pivotal-tracker",
   "browser_action": {
