@@ -6,6 +6,10 @@
   "author": "Oliver Switzer, Sai To Yeung, Shawna Mattison",
   "description": "A better workflow for writing What We Learned This Week learnings",
   "homepage_url": "https://github.com/oliverswitzer/red-labels-for-pivotal-tracker",
+  "browser_action": {
+    "default_icon": "icons/logo32.png",
+    "default_popup": "src/options/tracker-token-form.html"
+  },
   "icons": {
     "32": "icons/logo32.png",
     "64": "icons/logo64.png",
@@ -19,6 +23,9 @@
   ],
   "options_page": "src/options/index.html",
   "short_name": "WWLTW",
+  "web_accessible_resources": [
+    "icons/*"
+  ],
   "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'",
   "content_scripts": [
     {
