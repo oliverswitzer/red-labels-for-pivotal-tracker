@@ -6,6 +6,7 @@ import FindOrCreateWWLTWStory from './use_cases/find_or_create_wwltw_story';
 import WWLTWModal from './view/wwltw_modal';
 import fetchWrapper from '../utilities/fetch_wrapper'
 import storyListener from './view/story_listener'
+import iconListener from './view/icon_listener'
 import SetAlarm from '../utilities/alarm_creator'
 
 $(function () {
@@ -22,6 +23,7 @@ $(function () {
         modal.bindFormSubmission(addLearningToStoryDescription.execute);
 
         storyListener(modal.$modal);
+        iconListener();
 
         FindOrCreateWWLTWStory(wwltwRepository);
     });

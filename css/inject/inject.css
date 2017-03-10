@@ -25,3 +25,8 @@ i.icon.delete:before {
 .ui.modal {
     box-sizing: border-box;
 }
+
+.meta.wwltw-story:before {
+    background-size: 18px 18px !important;
+    background-image: url("chrome-extension://__MSG_@@extension_id__/icons/fatlogo.svg") !important;
+}

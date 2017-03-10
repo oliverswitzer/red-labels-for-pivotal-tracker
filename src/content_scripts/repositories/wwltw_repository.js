@@ -12,7 +12,7 @@ export default class WWLTWRepository {
     create(projectId, storyTitle) {
         this.trackerApiClient.createStory(
             projectId,
-            {name: storyTitle, story_type: 'chore'}
+            {name: storyTitle, story_type: 'chore', labels: ['wwltw-story']}
         )
     }
 

@@ -95,7 +95,8 @@ describe('WWLTWRepository', function () {
                 projectId,
                 jasmine.objectContaining({
                     name: storyTitle,
-                    story_type: 'chore'
+                    story_type: 'chore',
+                    labels: ['wwltw-story']
                 })
             );
         });
