@@ -31,7 +31,7 @@ For first time building locally, you'll need two files: `.env` and `production.e
 To build a new version, you'll want to bump the `version` and `version_name` in `manifest.json`.
 Then run:
 
-```$xslt
+```
 $ npm run package
 ```
 
