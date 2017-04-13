@@ -13,7 +13,7 @@ function save_options(e) {
         trackerApiToken: trackerApiToken
     }, function() {
         flashSuccessMessage(form);
-        getCurrentTrackerTabs(reloadProjectTabs);
+        getCurrentTrackerTabs().then(reloadProjectTabs).then(closeOptionsPage);
     });
 }
 
@@ -30,10 +30,21 @@ function restore_options() {
     });
 }
 
-function getCurrentTrackerTabs(callback) {
-    return chrome.tabs.query({
-        url: "*://www.pivotaltracker.com/*"
-    }, callback)
+function closeOptionsPage() {
+    setTimeout(() => {
+        chrome.tabs.getCurrent(function(tab) {
+            chrome.tabs.remove(tab.id, function() { });
+        });
+    }, 1000);
+
+}
+
+function getCurrentTrackerTabs() {
+    return new Promise((resolve) => {
+        chrome.tabs.query({
+            url: "*://www.pivotaltracker.com/*"
+        }, resolve)
+    });
 }
 
 function reloadProjectTabs(allTrackerTabs) {
