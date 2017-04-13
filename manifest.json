@@ -19,7 +19,8 @@
     "http://www.pivotaltracker.com/*",
     "https://www.pivotaltracker.com/*",
     "storage",
-    "alarms"
+    "alarms",
+    "tabs"
   ],
   "options_page": "src/options/index.html",
   "short_name": "WWLTW",
