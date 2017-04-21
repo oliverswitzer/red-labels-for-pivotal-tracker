@@ -13,7 +13,8 @@
     "package_and_deploy": "npm run package | tail -n 1 | npm run deploy",
     "watch": "webpack --progress --colors --watch",
     "webpack": "webpack --progress --colors",
-    "karma": "karma start"
+    "karma": "karma start",
+    "convert-plugin": "./scripts/convert-plugin-to-base-64.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/oliverswitzer/wwltw-for-pivotal-tracker#readme",
   "devDependencies": {
+    "base-64": "^0.1.0",
     "child_process": "^1.0.2",
     "dotenv-webpack": "^1.4.2",
     "fs-promise": "^2.0.0",
@@ -41,6 +43,8 @@
     "marked": "^0.3.6",
     "node-libcurl": "^1.1.0",
     "refresh-token": "^0.1.1",
+    "wdio-jasmine-framework": "^0.3.0",
+    "webdriverio": "^4.6.2",
     "webpack": "^2.2.1"
   },
   "dependencies": {

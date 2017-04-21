@@ -17,4 +17,4 @@ dist/
 *.bundle.js
 
 *.env
-!template.env
+!template.envtest/feature/screenshots
