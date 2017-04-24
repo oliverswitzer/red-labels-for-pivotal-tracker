@@ -13,7 +13,8 @@ fs.readFile(manifestFile, 'UTF-8', (err, data) => {
     const manifest = JSON.parse(data);
     const fileList = [
         '_locales/**/*',
-        'src/options/**/*'
+        'src/options/**/*',
+        'src/options/*'
     ];
 
     if (process.env.CIRCLE_BUILD_NUM) {
