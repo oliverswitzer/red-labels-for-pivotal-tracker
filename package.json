@@ -42,7 +42,8 @@
     "marked": "^0.3.6",
     "node-libcurl": "^1.1.0",
     "refresh-token": "^0.1.1",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-shell-plugin": "^0.5.0"
   },
   "dependencies": {
     "highlight.js": "^9.10.0",

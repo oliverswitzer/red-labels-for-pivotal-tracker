@@ -1,8 +1,10 @@
 const Dotenv = require('dotenv-webpack');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 module.exports = {
     plugins: [
-        new Dotenv()
+        new Dotenv(),
+        new WebpackShellPlugin({onBuildExit:['./scripts/package.js']})
     ],
     entry: {
         pivotal_tracker_content_scripts: './src/content_scripts/pivotal_tracker/main.js',
