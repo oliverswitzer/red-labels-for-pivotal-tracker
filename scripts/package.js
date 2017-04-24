@@ -1,23 +1,23 @@
 #! /usr/bin/env node
 
-var fs = require('fs');
-var exec = require('child_process').exec;
-var jsonfile = require('jsonfile');
+const fs = require('fs');
+const exec = require('child_process').exec;
+const jsonfile = require('jsonfile');
+const manifestFile = 'manifest.json';
+const rmdirSync = require('fs-extra').removeSync;
 
-var manifestFile = 'manifest.json';
-
-fs.readFile(manifestFile, 'UTF-8', function (err, data) {
+fs.readFile(manifestFile, 'UTF-8', (err, data) => {
     if (err) {
         console.log('Error!', err);
     }
-    var manifest = JSON.parse(data);
-    var fileList = [
+    const manifest = JSON.parse(data);
+    const fileList = [
         '_locales/**/*',
         'icons/*',
         'src/options/**/*'
     ];
 
-    if(process.env.CIRCLE_BUILD_NUM) {
+    if (process.env.CIRCLE_BUILD_NUM) {
         manifest.version = manifest.version + '.' + process.env.CIRCLE_BUILD_NUM;
     }
 
@@ -25,27 +25,56 @@ fs.readFile(manifestFile, 'UTF-8', function (err, data) {
 
     fileList.push(manifest.options_page);
     fileList.push(manifest.browser_action.default_popup);
-    fileList.push('src/options/index.js');
 
-    manifest.content_scripts.forEach(function (scripts) {
-        (scripts.css.concat(scripts.js)).forEach(function (file) {
+    manifest.content_scripts.forEach((scripts) => {
+        (scripts.css.concat(scripts.js)).forEach((file) => {
             fileList.push(file);
         });
     });
 
-    manifest.background.scripts.forEach(function (file) {
+    manifest.background.scripts.forEach((file) => {
         fileList.push(file);
     });
 
-    var zipFile = 'dist/' + manifest.short_name + '-' + manifest.version + '.zip';
+    const zipFile = 'dist/' + packageName(manifest) + '.zip';
     fileList.unshift(zipFile);
-    var cmd = 'zip ' + fileList.join(' ') + ' && zip -j ' + zipFile + ' dist/manifest.json';
 
-    exec(cmd, function(error, stdout, stderr) {
+    zipPackage(fileList, zipFile)
+        .then(() => makeUnzippedDirectory(zipFile, manifest))
+        .catch((error) => console.log(error));
+});
+
+const zipPackage = (fileList, zipFile) => {
+    return new Promise((resolve, reject) => {
+        exec('zip ' + fileList.join(' ') + ' && zip -j ' + zipFile + ' dist/manifest.json', (error, stdout, stderr) => {
+            if (error) {
+                reject('Error zipping into "dist" directory!', stdout, stderr);
+            } else {
+                resolve()
+            }
+        });
+    }).catch((error) => {
+        console.log(error);
+    });
+};
+
+const makeUnzippedDirectory = (zipFile, manifest) => {
+    makeZipDirectory(manifest);
+    exec(`unzip ${zipFile} -d dist/${packageName(manifest)}`, (error, stdout, stderr) => {
         if (error) {
-            console.log('Error!', error, stderr);
-        } else {
-            console.log('All good! Chrome extension packaged into\n', zipFile);
+            reject('Error unzipping for reference into dist/!', error, stderr);
         }
     });
-});
+};
+
+const makeZipDirectory = manifest => {
+    if (fs.existsSync(`dist/${packageName(manifest)}`)) {
+        rmdirSync(`dist/${packageName(manifest)}`)
+    }
+
+    fs.mkdirSync(`dist/${packageName(manifest)}`);
+};
+
+const packageName = manifest => {
+    return `${manifest.short_name}-${manifest.version}`
+};
