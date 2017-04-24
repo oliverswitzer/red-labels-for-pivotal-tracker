@@ -9,7 +9,8 @@ module.exports = {
     entry: {
         pivotal_tracker_content_scripts: './src/content_scripts/pivotal_tracker/main.js',
         gmail_content_scripts: './src/content_scripts/gmail/main.js',
-        background_scripts: './src/background/main.js'
+        background_scripts: './src/background/main.js',
+        options_page: './src/options/main.jsx'
     },
     output: {
         path: `${__dirname}/dist/bundles/`,
@@ -17,7 +18,16 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.css$/, loader: "style!css" }
+            {test: /\.css$/, loader: "style!css"},
+            {test: /\.json$/, exclude: /node_modules/, loader: 'json'},
+            {
+                test: /.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            }
         ]
     }
 };
