@@ -13,20 +13,26 @@ ISC License (included in the `LICENSE` file).
 $ npm run test
 ```
 
-or to run continually you'll need to install Karma
+To run Karma continually:
 ```
-$ npm install -g karma-cli
+$ npm run karma
 ```
-and to run:
+---
+
+## Getting started
+
+For first time building locally, you'll need two files: `.env` and `production.env`. 
+
+The `.env` file holds the development secrets. You can reference `template.env` to see an example of what these two files should contain for our secrets (both should have the same keys).
+
+**Build dependencies**:
 ```
-$ karma start
+$ yarn install 
 ```
 
 ---
 
 ## Building and Deploying
-
-For first time building locally, you'll need two files: `.env` and `production.env`. The `.env` file holds the development secrets. You can reference `template.env` to see an example of what these two files should contain for our secrets (both should have the same keys).
 
 To build a new version, you'll want to bump the `version` and `version_name` in `manifest.json`.
 Then run:
@@ -51,3 +57,5 @@ or to run it to continually watch/package changes:
 ```
 $ npm run watch
 ```
+
+This will also continually package the extension under `dist/`
