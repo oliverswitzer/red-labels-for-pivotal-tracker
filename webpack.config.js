@@ -17,15 +17,15 @@ module.exports = {
         filename: '[name].bundle.js'
     },
     module: {
-        loaders: [
-            {test: /\.css$/, loader: "style!css"},
-            {test: /\.json$/, exclude: /node_modules/, loader: 'json'},
+        rules: [
             {
                 test: /.jsx?$/,
-                loader: 'babel-loader',
                 exclude: /node_modules/,
-                query: {
+                use: {
+                  loader: 'babel-loader',
+                  options:{
                     presets: ['es2015', 'react']
+                  }
                 }
             }
         ]
