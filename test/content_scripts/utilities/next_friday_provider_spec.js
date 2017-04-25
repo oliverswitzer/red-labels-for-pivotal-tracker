@@ -19,7 +19,6 @@ describe('NextFridayProvider', function () {
 
             const fridayAtThree = new Date(2017, 2, 3, 14, 30, 0).valueOf();
 
-            debugger;
             expect(NextFridayProvider.millisecondsDate()).toEqual(fridayAtThree);
         });
 
