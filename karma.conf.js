@@ -17,11 +17,13 @@ module.exports = function(config) {
             'vendor/moment/moment.min.js',
             'test/test_helpers.js',
             '**/*_spec.js',
+            '**/*_spec.jsx'
         ],
 
         preprocessors: {
             // add webpack as preprocessor
-            '**/*_spec.js': ['webpack', 'sourcemap']
+            '**/*_spec.js': ['webpack', 'sourcemap'],
+            '**/*_spec.jsx': ['webpack', 'sourcemap']
         },
 
         // list of files to exclude
@@ -35,7 +37,13 @@ module.exports = function(config) {
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         reporters: ['progress'],
 
-        webpack: webpackConfig,
+        webpack: Object.assign({}, webpackConfig, {
+            externals: {
+                'react/lib/ExecutionEnvironment': true,
+                'react/addons': true,
+                'react/lib/ReactContext': 'window'
+            }
+        }),
         // web server port
         port: 9876,
 
