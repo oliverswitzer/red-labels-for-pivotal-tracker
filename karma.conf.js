@@ -44,7 +44,12 @@ module.exports = function(config) {
                 'react/lib/ReactContext': 'window'
             }
         }),
-        // web server port
+
+        webpackMiddleware: {
+            noInfo: true
+        },
+
+      // web server port
         port: 9876,
 
 
@@ -64,5 +69,9 @@ module.exports = function(config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: ['Chrome'],
+
+        client: {
+            captureConsole: false
+        }
     })
 };
