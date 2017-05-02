@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import TrackerTokenForm from './components/TrackerTokenForm.jsx';
-import OnboardingSection from "./components/OnboardingSection.jsx";
+import OnboardingSection from './components/OnboardingSection.jsx';
+import TokenInputAndToggleProjectContainer from './containers/TokenInputAndToggleProjectContainer.jsx';
+import ChromeStorageWrapper from '../content_scripts/utilities/chrome_storage_wrapper';
 
 class Main extends React.Component {
   constructor() {
@@ -20,33 +21,24 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div style={this.styles.container} className="ui grid">
-        <div className="row">
-          <div className="one wide column"/>
-          <div className="fourteen wide column">
-            <h1 style={this.styles.mainHeader}>What We Learned This Week for Pivotal Tracker</h1>
-            <OnboardingSection/>
+      <div style={this.styles.container}>
+        <div className="ui grid">
+          <div className="row">
+            <div className="one wide column"/>
+            <div className="fourteen wide column">
+              <h1 style={this.styles.mainHeader}>What We Learned This Week for Pivotal Tracker</h1>
+              <OnboardingSection/>
+            </div>
           </div>
         </div>
 
-        <div className="row centered">
-          <h2>To get started, we need your Pivotal Tracker token.</h2>
-        </div>
-        <div className="row centered">
-          <h4>You can find your token at the bottom of <a href="https://www.pivotaltracker.com/profile">your profile</a>.
-            We only use it to make new WWLTW chores every week.</h4>
-        </div>
-        <div className="row centered">
-          <div className="five wide column">
-            <TrackerTokenForm/>
-          </div>
-        </div>
+        <TokenInputAndToggleProjectContainer chromeStorageWrapper={this.props.chromeStorageWrapper}/>
       </div>
     )
   }
 }
 
 ReactDOM.render(
-  <Main/>,
+  <Main chromeStorageWrapper={new ChromeStorageWrapper(chrome)}/>,
   document.getElementById('container')
 );
