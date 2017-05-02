@@ -13,7 +13,7 @@ export default class PivotalTrackerApiClient {
         query.append('limit', 1);
 
         return this.fetchWrapper(
-            this._generateApiUrlBase(projectId) + "/stories?" + query.toString(),
+            this._generateApiUrlBaseForProject(projectId) + "/stories?" + query.toString(),
             {
                 method: 'GET',
                 headers: this._headers()
@@ -23,7 +23,7 @@ export default class PivotalTrackerApiClient {
 
     createStory(projectId, params) {
         return this.fetchWrapper(
-            `${this._generateApiUrlBase(projectId)}/stories`,
+            `${this._generateApiUrlBaseForProject(projectId)}/stories`,
             {
                 method: 'POST',
                 headers: this._headers(),
@@ -34,7 +34,7 @@ export default class PivotalTrackerApiClient {
 
     updateStory(projectId, storyId, description) {
         return this.fetchWrapper(
-            this._generateApiUrlBase(projectId) + "/stories/" + storyId, {
+            this._generateApiUrlBaseForProject(projectId) + "/stories/" + storyId, {
                 method: 'PUT',
                 headers: this._headers(),
                 body: JSON.stringify({description})
@@ -44,11 +44,20 @@ export default class PivotalTrackerApiClient {
 
     getProject(projectId) {
         return this.fetchWrapper(
-            this._generateApiUrlBase(projectId), {
+            this._generateApiUrlBaseForProject(projectId), {
                 method: 'GET',
                 headers: this._headers(),
             }
         ).then(response => response.json());
+    }
+
+    getAllProjects() {
+      return this.fetchWrapper(
+        this.TRACKER_BASE_URL + '/services/v5/projects', {
+          method: 'GET',
+          headers: this._headers()
+        }
+      ).then(response => response.json());
     }
 
     _headers() {
@@ -58,7 +67,7 @@ export default class PivotalTrackerApiClient {
         });
     }
 
-    _generateApiUrlBase(projectId) {
+    _generateApiUrlBaseForProject(projectId) {
         return this.TRACKER_BASE_URL + "/services/v5/projects/" + projectId;
     }
 }
