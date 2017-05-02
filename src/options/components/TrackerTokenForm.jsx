@@ -2,15 +2,13 @@ import React from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
 
 export default class TrackerTokenForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      trackerApiToken: '',
+      trackerApiToken: this.props.trackerApiToken,
       tokenSaved: false
     };
-
-    this._setTrackerTokenIfExists();
 
     this.styles = {
       submit: {
@@ -23,22 +21,22 @@ export default class TrackerTokenForm extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      trackerApiToken: nextProps.trackerApiToken
+    })
+  }
+
   handleFormSubmit(e) {
     e.preventDefault();
 
-    window.chrome.storage.sync.set({ trackerApiToken: this.state.trackerApiToken}, () => {
-      this.setState({ tokenSaved: true });
-    });
+    this.props.handleTokenSubmit(this.state.trackerApiToken);
+    this.setState({tokenSaved: true});
+
   };
 
   handleTokenChange(e) {
     this.setState({trackerApiToken: e.target.value});
-  };
-
-  _setTrackerTokenIfExists() {
-    chrome.storage.sync.get('trackerApiToken', function(options) {
-      this.setState({ trackerApiToken: options.trackerApiToken || '' })
-    }.bind(this));
   };
 
   render() {
@@ -47,7 +45,7 @@ export default class TrackerTokenForm extends React.Component {
         <Form.Input onChange={this.handleTokenChange} value={this.state.trackerApiToken} label='Tracker API Token' />
         <Message
           success
-          header='Saved successfully'
+          header='Saved token successfully'
           content="You're ready to start using the WWLTW plugin"
         />
         <Button style={this.styles.submit}>Submit</Button>
