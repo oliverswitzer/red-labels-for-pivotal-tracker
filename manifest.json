@@ -25,7 +25,8 @@
   "options_page": "src/options/index.html",
   "short_name": "WWLTW",
   "web_accessible_resources": [
-    "icons/*"
+    "icons/*",
+    "dist/bundles/options_page.bundle.js"
   ],
   "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'",
   "content_scripts": [
