@@ -29,12 +29,10 @@ export default class ProjectToggleSection extends React.Component {
 
     this.handleProjectToggle = this.handleProjectToggle.bind(this);
     this._toggleProjectDisabledStatus = this._toggleProjectDisabledStatus.bind(this);
-    this._renderRow = this._renderRow.bind(this);
+    this._renderColumn = this._renderColumn.bind(this);
   }
 
   handleProjectToggle(projectName) {
-    console.log('toggling: ', projectName);
-
     this.props.projectRepository.findAll()
       .then(allProjects =>
         allProjects.find(project => project.name === projectName)
@@ -52,9 +50,9 @@ export default class ProjectToggleSection extends React.Component {
     return projectToToggle;
   }
 
-  _renderRow(project, index) {
+  _renderColumn(project, index) {
     return (
-      <Grid.Column>
+      <Grid.Column key={index}>
         <ProjectToggleButton project={project} handleProjectToggle={this.handleProjectToggle} key={index}/>
       </Grid.Column>
     )
@@ -66,10 +64,10 @@ export default class ProjectToggleSection extends React.Component {
         <h2 style={this.styles.header}>Enable the plugin for the projects you want to use it for:</h2>
         <Grid style={this.styles.grid} columns='three'>
           {
-            _.chunk(this.state.projects, 3).map((projectsByTwo) => {
+            _.chunk(this.state.projects, 3).map((projectsByTwo, rowIndex) => {
               return (
-                <Grid.Row>
-                  { projectsByTwo.map((project, index) => this._renderRow(project, index)) }
+                <Grid.Row key={rowIndex}>
+                  { projectsByTwo.map((project, columnIndex) => this._renderColumn(project, columnIndex)) }
                 </Grid.Row>
               )
             })
