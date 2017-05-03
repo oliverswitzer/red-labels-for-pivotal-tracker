@@ -1,5 +1,6 @@
 import React from 'react'
-import {Radio} from "semantic-ui-react";
+import {Radio} from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 export default class ProjectToggleButton extends React.Component {
   constructor(props) {
@@ -23,6 +24,6 @@ export default class ProjectToggleButton extends React.Component {
 }
 
 ProjectToggleButton.propTypes = {
-  project: React.PropTypes.object.isRequired,
-  handleProjectToggle: React.PropTypes.func.isRequired
+  project: PropTypes.object.isRequired,
+  handleProjectToggle: PropTypes.func.isRequired
 };

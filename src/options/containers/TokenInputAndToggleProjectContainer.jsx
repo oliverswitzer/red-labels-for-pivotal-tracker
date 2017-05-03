@@ -11,7 +11,7 @@ export default class TokenInputAndToggleProjectContainer extends React.Component
     super(props);
 
     this.state = {
-      trackerApiToken: undefined
+      trackerApiToken: ''
     };
 
     this._setAlreadySavedToken();
