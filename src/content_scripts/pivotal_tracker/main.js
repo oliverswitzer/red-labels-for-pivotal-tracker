@@ -1,30 +1,29 @@
 import $ from 'jquery';
-import AddLearningToStoryDescription from './use_cases/add_learning_to_story_description';
 import PivotalTrackerApiClient from '../utilities/pivotal_tracker_api_client';
-import WWLTWRepository from '../repositories/wwltw_repository';
-import FindOrCreateWWLTWStory from './use_cases/find_or_create_wwltw_story';
-import WWLTWModal from './view/wwltw_modal';
 import fetchWrapper from '../utilities/fetch_wrapper'
-import storyListener from './view/story_listener'
-import iconListener from './view/icon_listener'
-import SetAlarm from '../utilities/alarm_creator'
+import ProjectRepository from '../repositories/project_repository';
+import ChromeStorageWrapper from '../utilities/chrome_storage_wrapper';
+import isProjectEnabled from './use_cases/is_project_enabled'
+import ProjectIdProvider from '../utilities/project_id_provider'
 
-$(function () {
-    SetAlarm(chrome);
-
-    const modalInitializer = new WWLTWModal();
-    const modal = modalInitializer.initialize();
+import Application from './application';
 
 
-    chrome.storage.sync.get('trackerApiToken', function (options) {
-        let wwltwRepository = new WWLTWRepository(new PivotalTrackerApiClient(options.trackerApiToken, fetchWrapper));
+chrome.storage.sync.get('trackerApiToken', function (options) {
+  const trackerApiClient = new PivotalTrackerApiClient(options.trackerApiToken, fetchWrapper);
 
-        const addLearningToStoryDescription = new AddLearningToStoryDescription(wwltwRepository);
-        modal.bindFormSubmission(addLearningToStoryDescription.execute);
+  const projectRepository = new ProjectRepository({
+    trackerApiClient,
+    chromeStorageWrapper: new ChromeStorageWrapper(chrome)
+  });
 
-        storyListener(modal.$modal);
-        iconListener();
+  isProjectEnabled(projectRepository, ProjectIdProvider)
+    .then(() => Application.run(trackerApiClient))
+    .catch((error) => {
+      console.log('WWLTW extension is disabled for this project');
 
-        FindOrCreateWWLTWStory(wwltwRepository);
-    });
+      if(error) {
+        console.error(error);
+      }
+    })
 });
