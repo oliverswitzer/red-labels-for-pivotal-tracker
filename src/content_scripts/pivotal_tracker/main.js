@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import PivotalTrackerApiClient from '../utilities/pivotal_tracker_api_client';
 import fetchWrapper from '../utilities/fetch_wrapper'
 import ProjectRepository from '../repositories/project_repository';
