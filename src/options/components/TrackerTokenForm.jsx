@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
+import PropTypes from 'prop-types';
 
 export default class TrackerTokenForm extends React.Component {
   constructor(props) {
@@ -53,3 +54,9 @@ export default class TrackerTokenForm extends React.Component {
     )
   }
 }
+
+
+TrackerTokenForm.propTypes = {
+  trackerApiToken: PropTypes.string,
+  handleTokenSubmit: PropTypes.func.isRequired
+};
