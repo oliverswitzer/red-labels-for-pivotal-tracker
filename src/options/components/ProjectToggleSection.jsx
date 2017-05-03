@@ -1,11 +1,11 @@
 import React from 'react'
 import ProjectToggleButton from './ProjectToggleButton.jsx'
 import {Grid} from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 export default class ProjectToggleSection extends React.Component {
   constructor(props) {
     super(props);
-
 
     this.styles = {
       grid: {
@@ -19,6 +19,7 @@ export default class ProjectToggleSection extends React.Component {
         textAlign: 'center'
       }
     };
+
     this.state = {
       projects: []
     };
@@ -77,3 +78,7 @@ export default class ProjectToggleSection extends React.Component {
     )
   }
 }
+
+ProjectToggleSection.propTypes = {
+  projectRepository: PropTypes.object.isRequired
+};
