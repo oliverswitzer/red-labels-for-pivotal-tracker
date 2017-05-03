@@ -6,21 +6,21 @@ describe('ProjectRepository', () => {
   let projectRepository, trackerApiClientSpy, chromeStorageWrapperSpy;
 
   beforeEach(() => {
-    let remoteProjects = [
+    let remoteProjectsFromTracker = [
       {
-        "id": 98,
-        "kind": "project",
-        "name": "Learn About the Force",
+        'id': 98,
+        'kind': 'project',
+        'name': 'Learn About the Force'
       },
       {
-        "id": 99,
-        "kind": "project",
-        "name": "Learn About Another Force",
+        'id': 99,
+        'kind': 'project',
+        'name': 'Learn About Another Force'
       },
     ];
 
     trackerApiClientSpy = {
-      getAllProjects: jasmine.createSpy('getAllProjects').and.returnValue(Promise.resolve(remoteProjects)),
+      getAllProjects: jasmine.createSpy('getAllProjects').and.returnValue(Promise.resolve(remoteProjectsFromTracker)),
       update: jasmine.createSpy('update')
     };
 
@@ -28,6 +28,38 @@ describe('ProjectRepository', () => {
 
     spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve([]));
     spyOn(chromeStorageWrapperSpy, 'set').and.returnValue(Promise.resolve())
+  });
+
+  describe('findById', () => {
+    context('a project with queried ID has been previously saved to chrome', () => {
+      beforeEach(() => {
+        let localProjects = [
+          new Project({id: 98, name: 'Learn About the Force', disabled: false}),
+          new Project({id: 99, name: 'Learn About Another Force', disabled: true}),
+        ];
+
+        chromeStorageWrapperSpy = new ChromeStorageWrapper();
+        spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
+        spyOn(chromeStorageWrapperSpy, 'set').and.returnValue(Promise.resolve());
+
+        projectRepository = new ProjectRepository({
+          trackerApiClient: trackerApiClientSpy,
+          chromeStorageWrapper: chromeStorageWrapperSpy
+        })
+      });
+
+      it('returns the first project that has the name that was passed in', (done) => {
+        projectRepository.findById(98).then((returnedProject) => {
+          expect(returnedProject).toEqual(jasmine.objectContaining({
+            id: 98,
+            name: 'Learn About the Force',
+            disabled: false
+          }));
+
+          done();
+        });
+      });
+    });
   });
 
   describe('findAll', () => {
@@ -42,11 +74,13 @@ describe('ProjectRepository', () => {
       it('fetches all projects from tracker', (done) => {
         projectRepository.findAll().then((returnedProjects) => {
           expect(returnedProjects[0]).toEqual(jasmine.objectContaining({
-            name: 'Learn About the Force',
+            id: 98,
+            name: 'Learn About the Force'
           }));
 
           expect(returnedProjects[1]).toEqual(jasmine.objectContaining({
-            name: 'Learn About Another Force',
+            id: 99,
+            name: 'Learn About Another Force'
           }));
 
           done();
@@ -76,9 +110,9 @@ describe('ProjectRepository', () => {
       });
     });
 
-    context('a project has been previously saved to chrome as enabled', () => {
+    context('when a project has been previously saved to chrome as enabled', () => {
       beforeEach(() => {
-        let localProjects = [new Project({name: 'Learn About the Force', disabled: false})];
+        const localProjects = [new Project({id: 98, name: 'Learn About the Force', disabled: false})];
 
         chromeStorageWrapperSpy = new ChromeStorageWrapper();
         spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
@@ -93,6 +127,7 @@ describe('ProjectRepository', () => {
       it('returns projects from tracker with updated attributes from chrome storage', (done) => {
         projectRepository.findAll().then((returnedProjects) => {
           expect(returnedProjects[0]).toEqual(jasmine.objectContaining({
+            id: 98,
             name: 'Learn About the Force',
             disabled: false
           }));
@@ -101,9 +136,10 @@ describe('ProjectRepository', () => {
         });
       });
 
-      it('still returns the other project not stored in chrome', () => {
+      it('still returns the other project not previously stored in chrome', () => {
         projectRepository.findAll().then((returnedProjects) => {
           expect(returnedProjects[1]).toEqual(jasmine.objectContaining({
+            id: 99,
             name: 'Learn About Another Force',
             disabled: true
           }));
@@ -111,7 +147,34 @@ describe('ProjectRepository', () => {
           done();
         });
       })
-    })
+    });
+
+    context('when a tracker project changes names', () => {
+      beforeEach(() => {
+        const localProjects = [new Project({id: 98, name: 'some stale name stored in chrome', disabled: false})];
+
+        chromeStorageWrapperSpy = new ChromeStorageWrapper();
+        spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
+        spyOn(chromeStorageWrapperSpy, 'set').and.returnValue(Promise.resolve());
+
+        projectRepository = new ProjectRepository({
+          trackerApiClient: trackerApiClientSpy,
+          chromeStorageWrapper: chromeStorageWrapperSpy
+        })
+      });
+
+      it('reflects the updated name from tracker when remote projects are merged', () => {
+        projectRepository.findAll().then((returnedProjects) => {
+          expect(returnedProjects[0]).toEqual(jasmine.objectContaining({
+            id: 98,
+            name: 'Learn About the Force',
+            disabled: false
+          }));
+
+          done();
+        });
+      });
+    });
   });
 
   describe('update', () => {
@@ -119,9 +182,9 @@ describe('ProjectRepository', () => {
 
     beforeEach(() => {
       localProjects = [
-        new Project({name: 'some project I will update', disabled: false}),
-        new Project({name: 'some other project', disabled: false}),
-        new Project({name: 'some other other project', disabled: true})
+        new Project({id: 1, name: 'some project I will update', disabled: false}),
+        new Project({id: 2, name: 'some other project', disabled: false}),
+        new Project({id: 3, name: 'some other other project', disabled: true})
       ];
 
       chromeStorageWrapperSpy = new ChromeStorageWrapper();
@@ -136,13 +199,13 @@ describe('ProjectRepository', () => {
 
 
     it('persists the updated attributes to chrome', (done) => {
-      const projectToUpdate = new Project({name: 'some project I will update', disabled: true});
+      const projectToUpdate = new Project({id: 1, name: 'some project I will update', disabled: true});
 
       projectRepository.update(projectToUpdate).then(() => {
         expect(chromeStorageWrapperSpy.set).toHaveBeenCalledWith(
           {
             projects: [
-              jasmine.objectContaining({name: 'some project I will update', disabled: true}),
+              jasmine.objectContaining({id: 1, name: 'some project I will update', disabled: true}),
               jasmine.any(Object),
               jasmine.any(Object)
             ]
@@ -152,5 +215,21 @@ describe('ProjectRepository', () => {
         done();
       });
     });
+
+    context('with project that has no id set', () => {
+      it('rejects the promise with error message', (done) => {
+        const projectToUpdate = new Project({name: 'some project I will update', disabled: true});
+
+        projectRepository.update(projectToUpdate)
+          .then(() => {
+            fail('promise should be rejected');
+            done();
+          })
+          .catch((errorMessage) => {
+            expect(errorMessage).toEqual('project ID is missing');
+            done();
+          });
+      })
+    })
   });
 });
