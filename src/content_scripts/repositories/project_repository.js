@@ -9,6 +9,16 @@ export default class ProjectRepository {
     this.update = this.update.bind(this);
   }
 
+  findById(projectId) {
+    return new Promise(resolve => {
+      this.findAll().then(allProjects => {
+        const foundProject = allProjects.find((project) => project.id === projectId);
+
+        resolve(foundProject);
+      });
+    })
+  }
+
   findAll() {
     return new Promise(resolve => {
       this._trackerApiClient.getAllProjects().then(projectsFromTracker => {
@@ -19,13 +29,15 @@ export default class ProjectRepository {
           .then(mergedProjects => {
             return this._chromeStorageWrapper.set({projects: mergedProjects})
               .then(() => resolve(mergedProjects));
-          })
-      })
+          });
+      });
     });
   }
 
   update(project) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
+      if(_.isNil(project.id)) { reject('project ID is missing') }
+
       this._chromeStorageWrapper.get('projects')
         .then((savedProjects) => {
            return _.unionBy([project], savedProjects, 'name');
@@ -42,13 +54,13 @@ export default class ProjectRepository {
 
     return projectsFromTracker.map(remoteProject => {
       const localProject = localProjects.find(
-        (project) => project.name === remoteProject.name
+        (project) => project.id === remoteProject.id
       );
 
       if (localProject) {
-        return new Project({name: remoteProject.name, disabled: localProject.disabled})
+        return new Project({id: remoteProject.id, name: remoteProject.name, disabled: localProject.disabled})
       } else {
-        return new Project({name: remoteProject.name, disabled: true})
+        return new Project({id: remoteProject.id, name: remoteProject.name, disabled: true})
       }
     });
   }
