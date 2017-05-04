@@ -30,3 +30,13 @@ i.icon.delete:before {
     background-size: 18px 18px !important;
     background-image: url("chrome-extension://__MSG_@@extension_id__/icons/fatlogo.svg") !important;
 }
+
+.ui.message {
+    font-size: 12px;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.ui.message a {
+    color: rgb(19, 128, 120) !important;
+}

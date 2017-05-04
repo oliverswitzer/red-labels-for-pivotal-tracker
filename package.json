@@ -66,6 +66,7 @@
     "react-dom": "^15.5.4",
     "semantic-ui-dimmer": "^2.2.9",
     "semantic-ui-dropdown": "^2.2.9",
+    "semantic-ui-message": "^2.2.10",
     "semantic-ui-modal": "^2.2.9",
     "semantic-ui-react": "^0.68.2",
     "semantic-ui-transition": "^2.2.9",

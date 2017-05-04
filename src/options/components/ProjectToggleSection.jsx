@@ -61,7 +61,7 @@ export default class ProjectToggleSection extends React.Component {
 
   render() {
     return (
-      <div style={this.styles.container}>
+      <div id='toggle-projects-section' style={this.styles.container}>
         <h2 style={this.styles.header}>Enable the plugin for the projects you want to use it for:</h2>
         <Grid style={this.styles.grid} columns='three'>
           {
