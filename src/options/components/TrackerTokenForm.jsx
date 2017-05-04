@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Message } from 'semantic-ui-react'
+import {Button, Form, Message, Segment} from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
 export default class TrackerTokenForm extends React.Component {
@@ -12,6 +12,9 @@ export default class TrackerTokenForm extends React.Component {
     };
 
     this.styles = {
+      container: {
+        boxShadow: '3px 8px 34px -10px rgba(0,0,0,0.75)'
+      },
       submit: {
         background: '#138078',
         color:  '#FFFFFF'
@@ -42,15 +45,17 @@ export default class TrackerTokenForm extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleFormSubmit} success={this.state.tokenSaved}>
-        <Form.Input onChange={this.handleTokenChange} value={this.state.trackerApiToken} label='Tracker API Token' />
-        <Message
-          success
-          header='Saved token successfully'
-          content="You're ready to start using the WWLTW plugin"
-        />
-        <Button style={this.styles.submit}>Submit</Button>
-      </Form>
+      <Segment style={this.styles.container}>
+        <Form onSubmit={this.handleFormSubmit} success={this.state.tokenSaved}>
+          <Form.Input onChange={this.handleTokenChange} value={this.state.trackerApiToken} label='Tracker API Token' />
+          <Message
+            success
+            header='Saved token successfully'
+            content="You're ready to start using the WWLTW plugin"
+          />
+          <Button fluid style={this.styles.submit}>Submit</Button>
+        </Form>
+      </Segment>
     )
   }
 }

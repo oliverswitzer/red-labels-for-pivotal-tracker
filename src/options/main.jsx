@@ -10,7 +10,8 @@ class Main extends React.Component {
 
     this.styles = {
       container: {
-        marginTop: '50px'
+        marginTop: '50px',
+        height: '100%'
       },
       mainHeader: {
         marginBottom: '55px',

@@ -5,6 +5,7 @@ import ProjectRepository from '../../content_scripts/repositories/project_reposi
 import PivotalTrackerApiClient from '../../content_scripts/utilities/pivotal_tracker_api_client';
 import fetchWrapper from '../../../src/content_scripts/utilities/fetch_wrapper'
 import * as _ from 'lodash';
+import {Header} from "semantic-ui-react";
 
 export default class TokenInputAndToggleProjectContainer extends React.Component {
   constructor(props) {
@@ -12,6 +13,26 @@ export default class TokenInputAndToggleProjectContainer extends React.Component
 
     this.state = {
       trackerApiToken: ''
+    };
+
+    this.styles = {
+      container: {
+        backgroundColor: 'rgba(19, 128, 120, 0.75)',
+        color: 'white',
+        marginTop: '35px',
+        paddingTop: '35px'
+      },
+      a: {
+        color: '#0E538D'
+      },
+      header: {
+        color: 'white'
+      },
+      subHeader: {
+        color: 'white',
+        fontSize: '0.7em',
+        lineHeight: '1.5'
+      }
     };
 
     this._setAlreadySavedToken();
@@ -33,27 +54,38 @@ export default class TokenInputAndToggleProjectContainer extends React.Component
 
   render() {
     return (
-      <div className="ui grid">
-        <div className="row centered">
-          <h2>To get started, we need your Pivotal Tracker token.</h2>
-        </div>
-        <div className="row centered">
-          <h4>You can find your token at the bottom of <a href="https://www.pivotaltracker.com/profile">your profile</a>.
-            We only use it to make new WWLTW chores every week.</h4>
-        </div>
-        <div className="row centered">
-          <div className="five wide column">
-            <TrackerTokenForm trackerApiToken={this.state.trackerApiToken}
-                              handleTokenSubmit={this.handleTokenSubmit}/>
-            {
-              !_.isEmpty(this.state.trackerApiToken) && <ProjectToggleSection trackerApiToken={this.state.trackerApiToken}
-                                                                            projectRepository={
-                                                                              new ProjectRepository({
-                                                                                trackerApiClient: new PivotalTrackerApiClient(this.state.trackerApiToken, fetchWrapper),
-                                                                                chromeWrapper: this.props.chromeWrapper
-                                                                              })}
-                                                                        />
-            }
+      <div style={this.styles.container}>
+        <div className="ui grid">
+          <div className="row centered">
+            <Header style={this.styles.header} as='h2'>
+              To get started, we need your Pivotal Tracker token.
+              <Header.Subheader style={this.styles.subHeader}>
+                You can find your token at the bottom of <a style={this.styles.a}
+                                                            href="https://www.pivotaltracker.com/profile">your
+                profile</a>.
+                We only use it to make new WWLTW chores every week.
+              </Header.Subheader>
+            </Header>
+          </div>
+          <div className="row centered">
+            <div className="five wide column">
+              <TrackerTokenForm trackerApiToken={this.state.trackerApiToken}
+                                handleTokenSubmit={this.handleTokenSubmit}/>
+            </div>
+          </div>
+          <div className="row centered">
+            <div className="ten wide column">
+              {
+                !_.isEmpty(this.state.trackerApiToken) &&
+                <ProjectToggleSection trackerApiToken={this.state.trackerApiToken}
+                                      projectRepository={
+                                        new ProjectRepository({
+                                          trackerApiClient: new PivotalTrackerApiClient(this.state.trackerApiToken, fetchWrapper),
+                                          chromeWrapper: this.props.chromeWrapper
+                                        })}
+                />
+              }
+            </div>
           </div>
         </div>
       </div>
