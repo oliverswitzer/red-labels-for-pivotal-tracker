@@ -20,13 +20,13 @@ export default class TokenInputAndToggleProjectContainer extends React.Component
   }
 
   _setAlreadySavedToken() {
-    this.props.chromeStorageWrapper.get('trackerApiToken').then(trackerApiToken => {
+    this.props.chromeWrapper.get('trackerApiToken').then(trackerApiToken => {
       this.setState({trackerApiToken})
     });
   }
 
   handleTokenSubmit(trackerApiToken) {
-    this.props.chromeStorageWrapper.set({trackerApiToken}).then(() => {
+    this.props.chromeWrapper.set({trackerApiToken}).then(() => {
       this.setState({trackerApiToken});
     });
   }
@@ -50,7 +50,7 @@ export default class TokenInputAndToggleProjectContainer extends React.Component
                                                                             projectRepository={
                                                                               new ProjectRepository({
                                                                                 trackerApiClient: new PivotalTrackerApiClient(this.state.trackerApiToken, fetchWrapper),
-                                                                                chromeStorageWrapper: this.props.chromeStorageWrapper
+                                                                                chromeWrapper: this.props.chromeWrapper
                                                                               })}
                                                                         />
             }

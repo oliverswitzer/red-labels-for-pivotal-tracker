@@ -1,7 +1,7 @@
-import ChromeStorageWrapper from '../../../src/content_scripts/utilities/chrome_storage_wrapper';
+import ChromeWrapper from '../../../src/content_scripts/utilities/chrome_wrapper';
 
-describe('ChromeStorageWrapper', () => {
-  let chromeStorageWrapper, chromeSpy, chromeSpyGetCallback;
+describe('ChromeWrapper', () => {
+  let chromeWrapper, chromeSpy, chromeSpyGetCallback;
 
   describe('get', () => {
     beforeEach(() => {
@@ -16,11 +16,11 @@ describe('ChromeStorageWrapper', () => {
       };
 
 
-      chromeStorageWrapper = new ChromeStorageWrapper(chromeSpy);
+      chromeWrapper = new ChromeWrapper(chromeSpy);
     });
 
     it('returns the value of the key you asked for', (done) => {
-      chromeStorageWrapper.get('someKey').then((valueOfFoo) => {
+      chromeWrapper.get('someKey').then((valueOfFoo) => {
         expect(valueOfFoo).toEqual('someValue');
         done();
       });
@@ -39,15 +39,31 @@ describe('ChromeStorageWrapper', () => {
         }
       };
 
-      chromeStorageWrapper = new ChromeStorageWrapper(chromeSpy);
+      chromeWrapper = new ChromeWrapper(chromeSpy);
     });
 
     it('delegates to chrome.storage.sync.set', (done) => {
-      chromeStorageWrapper.set({someKey: 'some value'}).then(() => {
+      chromeWrapper.set({someKey: 'some value'}).then(() => {
         expect(chromeSpy.storage.sync.set).toHaveBeenCalledWith({someKey: 'some value'});
 
         done();
       })
+    })
+  });
+
+  describe('getURL', () => {
+    beforeEach(() => {
+      chromeSpy = {
+        extension: {
+          getURL: jasmine.createSpy('getURL').and.returnValue('some resolved url path')
+        }
+      };
+
+      chromeWrapper = new ChromeWrapper(chromeSpy);
+    });
+
+    it('delegates to chrome.storage.sync.getURL', () => {
+      expect(chromeWrapper.getURL('some/url.html')).toEqual('some resolved url path')
     })
   })
 });

@@ -7,7 +7,7 @@ describe('isProjectEnabled', () => {
   let projectRepositorySpy, foundProject;
 
   beforeEach(() => {
-    projectRepositorySpy = new ProjectRepository({trackerApiClient: '', chromeStorageWrapper: ''});
+    projectRepositorySpy = new ProjectRepository({trackerApiClient: '', chromeWrapper: ''});
 
     foundProject = new Project({name: 'some project', disabled: true});
 
@@ -51,7 +51,7 @@ describe('isProjectEnabled', () => {
     let projectRepositorySpyThatReturnsUndefined;
 
     beforeEach(() => {
-      projectRepositorySpyThatReturnsUndefined = new ProjectRepository({trackerApiClient: '', chromeStorageWrapper: ''});
+      projectRepositorySpyThatReturnsUndefined = new ProjectRepository({trackerApiClient: '', chromeWrapper: ''});
       spyOn(projectRepositorySpyThatReturnsUndefined, 'findById').and.returnValue(Promise.resolve(undefined));
     });
 

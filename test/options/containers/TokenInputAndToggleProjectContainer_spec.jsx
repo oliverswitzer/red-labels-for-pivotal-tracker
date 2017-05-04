@@ -1,21 +1,21 @@
 import {shallow} from 'enzyme';
 import TokenInputAndToggleProjectContainer from '../../../src/options/containers/TokenInputAndToggleProjectContainer.jsx';
 import React from 'react';
-import ChromeStorageWrapper from '../../../src/content_scripts/utilities/chrome_storage_wrapper';
+import ChromeWrapper from '../../../src/content_scripts/utilities/chrome_wrapper';
 
 describe('TokenInputAndToggleProjectContainer', () => {
   let component;
   let defaultProps;
-  let chromeStorageWrapper;
+  let chromeWrapper;
 
   beforeEach(() => {
-    chromeStorageWrapper = new ChromeStorageWrapper();
+    chromeWrapper = new ChromeWrapper();
 
-    spyOn(chromeStorageWrapper, 'set').and.returnValue(Promise.resolve());
-    spyOn(chromeStorageWrapper, 'get').and.returnValue(Promise.resolve('some token stored in chrome'));
+    spyOn(chromeWrapper, 'set').and.returnValue(Promise.resolve());
+    spyOn(chromeWrapper, 'get').and.returnValue(Promise.resolve('some token stored in chrome'));
 
     defaultProps = {
-      chromeStorageWrapper: chromeStorageWrapper
+      chromeWrapper: chromeWrapper
     }
   });
 
@@ -23,7 +23,7 @@ describe('TokenInputAndToggleProjectContainer', () => {
     it('tries to get the tracker token from chrome', () => {
       component = shallow(<TokenInputAndToggleProjectContainer {...defaultProps} />);
 
-      expect(chromeStorageWrapper.get).toHaveBeenCalledWith('trackerApiToken');
+      expect(chromeWrapper.get).toHaveBeenCalledWith('trackerApiToken');
     });
 
     it('renders TrackerTokenForm with tracker token from chrome', (done) => {
@@ -45,7 +45,7 @@ describe('TokenInputAndToggleProjectContainer', () => {
       component.instance().handleTokenSubmit('some token');
 
       setImmediate(() => {
-        expect(chromeStorageWrapper.set).toHaveBeenCalledWith(jasmine.objectContaining({
+        expect(chromeWrapper.set).toHaveBeenCalledWith(jasmine.objectContaining({
           trackerApiToken: 'some token'
         }));
 
