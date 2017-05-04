@@ -26,6 +26,7 @@
   "short_name": "WWLTW",
   "web_accessible_resources": [
     "icons/*",
+    "icons/**/*",
     "dist/bundles/options_page.bundle.js",
     "src/options/index.html"
   ],
