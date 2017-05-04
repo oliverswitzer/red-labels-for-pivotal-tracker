@@ -26,6 +26,10 @@ export default class ProjectToggleSection extends React.Component {
 
     this.props.projectRepository.findAll().then(projects => {
       this.setState({projects: projects});
+
+      if(projects.length > 0) {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
     });
 
     this.handleProjectToggle = this.handleProjectToggle.bind(this);
@@ -63,9 +67,9 @@ export default class ProjectToggleSection extends React.Component {
     return (
       <div style={this.styles.container}>
         <h2 style={this.styles.header}>Enable the plugin for the projects you want to use it for:</h2>
-        <Grid style={this.styles.grid} columns='three'>
+        <Grid style={this.styles.grid} columns='five'>
           {
-            _.chunk(this.state.projects, 3).map((projectsByTwo, rowIndex) => {
+            _.chunk(this.state.projects, 5).map((projectsByTwo, rowIndex) => {
               return (
                 <Grid.Row key={rowIndex}>
                   { projectsByTwo.map((project, columnIndex) => this._renderColumn(project, columnIndex)) }

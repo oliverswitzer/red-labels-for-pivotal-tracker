@@ -1,5 +1,5 @@
 import React from 'react'
-import {Radio} from 'semantic-ui-react';
+import {Radio, Segment} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 export default class ProjectToggleButton extends React.Component {
@@ -15,10 +15,13 @@ export default class ProjectToggleButton extends React.Component {
 
   render() {
     return (<div>
-      <Radio toggle
-             label={this.props.project.name}
-             onChange={this._handleProjectToggle}
-             checked={!this.props.project.disabled}/>
+      <Segment compact size='large' color='green'>
+        <Radio slider
+                  style={{ fontSize: '15px'}}
+                  label={this.props.project.name}
+                  onChange={this._handleProjectToggle}
+                  checked={!this.props.project.disabled}/>
+      </Segment>
     </div>)
   }
 }

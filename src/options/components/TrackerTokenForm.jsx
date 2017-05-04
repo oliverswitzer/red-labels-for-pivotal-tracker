@@ -49,7 +49,7 @@ export default class TrackerTokenForm extends React.Component {
           header='Saved token successfully'
           content="You're ready to start using the WWLTW plugin"
         />
-        <Button style={this.styles.submit}>Submit</Button>
+        <Button fluid style={this.styles.submit}>Submit</Button>
       </Form>
     )
   }

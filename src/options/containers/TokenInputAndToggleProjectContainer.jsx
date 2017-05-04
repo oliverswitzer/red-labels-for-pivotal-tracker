@@ -45,14 +45,19 @@ export default class TokenInputAndToggleProjectContainer extends React.Component
           <div className="five wide column">
             <TrackerTokenForm trackerApiToken={this.state.trackerApiToken}
                               handleTokenSubmit={this.handleTokenSubmit}/>
+          </div>
+        </div>
+        <div className="row centered">
+          <div className="ten wide column">
             {
-              !_.isEmpty(this.state.trackerApiToken) && <ProjectToggleSection trackerApiToken={this.state.trackerApiToken}
-                                                                            projectRepository={
-                                                                              new ProjectRepository({
-                                                                                trackerApiClient: new PivotalTrackerApiClient(this.state.trackerApiToken, fetchWrapper),
-                                                                                chromeWrapper: this.props.chromeWrapper
-                                                                              })}
-                                                                        />
+              !_.isEmpty(this.state.trackerApiToken) &&
+              <ProjectToggleSection trackerApiToken={this.state.trackerApiToken}
+                                    projectRepository={
+                                      new ProjectRepository({
+                                        trackerApiClient: new PivotalTrackerApiClient(this.state.trackerApiToken, fetchWrapper),
+                                        chromeWrapper: this.props.chromeWrapper
+                                      })}
+              />
             }
           </div>
         </div>
