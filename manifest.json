@@ -25,7 +25,9 @@
   "options_page": "src/options/index.html",
   "short_name": "WWLTW",
   "web_accessible_resources": [
-    "icons/*"
+    "icons/*",
+    "dist/bundles/options_page.bundle.js",
+    "src/options/index.html"
   ],
   "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'",
   "content_scripts": [
@@ -38,14 +40,15 @@
         "dist/bundles/pivotal_tracker_content_scripts.bundle.js"
       ],
       "css": [
+        "vendor/semantic-ui/icon.min.css",
         "vendor/semantic-ui/button.min.css",
+        "vendor/semantic-ui/message.min.css",
         "vendor/semantic-ui/container.min.css",
         "vendor/semantic-ui/dimmer.min.css",
         "vendor/semantic-ui/dropdown.min.css",
         "vendor/semantic-ui/form.min.css",
         "vendor/semantic-ui/grid.min.css",
         "vendor/semantic-ui/header.min.css",
-        "vendor/semantic-ui/icon.min.css",
         "vendor/semantic-ui/input.min.css",
         "vendor/semantic-ui/label.min.css",
         "vendor/semantic-ui/modal.min.css",

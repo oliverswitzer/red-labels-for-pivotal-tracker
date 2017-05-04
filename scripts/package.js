@@ -13,8 +13,8 @@ fs.readFile(manifestFile, 'UTF-8', (err, data) => {
     const manifest = JSON.parse(data);
     const fileList = [
         '_locales/**/*',
-        'icons/*',
-        'src/options/**/*'
+        'src/options/**/*',
+        'src/options/*'
     ];
 
     if (process.env.CIRCLE_BUILD_NUM) {
@@ -33,6 +33,10 @@ fs.readFile(manifestFile, 'UTF-8', (err, data) => {
     });
 
     manifest.background.scripts.forEach((file) => {
+        fileList.push(file);
+    });
+
+    manifest.web_accessible_resources.forEach((file) => {
         fileList.push(file);
     });
 

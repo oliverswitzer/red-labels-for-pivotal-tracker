@@ -1,5 +1,7 @@
 import tagList from './tagList';
 import $ from 'jquery';
+import addElementToBody from '../../utilities/add_element_to_body'
+
 $.fn.modal= require('semantic-ui-modal');
 $.fn.dropdown = require('semantic-ui-dropdown');
 $.fn.transition = require('semantic-ui-transition');
@@ -41,7 +43,7 @@ export default class WWLTWModal {
             </div>
         </div>`;
 
-        let modalContainer = this.addElementToBody(modalContent);
+        let modalContainer = addElementToBody(modalContent);
         let learningBody = modalContainer.querySelector("#learning-body");
         learningBody.placeholder = "### A Header for your Learning (recommended)\n\n";
         learningBody.placeholder += "Body of learning. You can use all the markdown you want\n\n";
@@ -97,13 +99,6 @@ export default class WWLTWModal {
 
         return Array.prototype.join.call(tags, ', ');
     };
-
-    addElementToBody(innerHtml) {
-        let elementContainer = document.createElement("div");
-        elementContainer.innerHTML = innerHtml;
-        document.querySelector('body').appendChild(elementContainer);
-        return elementContainer;
-    }
 
     _preventEnteringCustomTagsFromSubmitting() {
         $(this.wwltwForm).on('keydown', function (e) {
