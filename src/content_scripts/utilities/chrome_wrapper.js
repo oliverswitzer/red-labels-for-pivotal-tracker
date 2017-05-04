@@ -1,6 +1,10 @@
-export default class ChromeStorageWrapper {
+export default class ChromeWrapper {
   constructor(chrome) {
     this._chrome = chrome;
+  }
+
+  getURL(url) {
+    return this._chrome.extension.getURL(url);
   }
 
   get(chromeStorageKey) {

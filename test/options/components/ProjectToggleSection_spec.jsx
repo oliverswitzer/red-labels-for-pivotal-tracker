@@ -14,7 +14,7 @@ describe('ProjectToggleSection', () => {
       new Project({name: 'some other enabled project', disabled: true})
     ];
 
-    projectRepositorySpy = new ProjectRepository({trackerApiClient: null, chromeStorageWrapper: null});
+    projectRepositorySpy = new ProjectRepository({trackerApiClient: null, chromeWrapper: null});
 
     const projectsWithBothDisabled = _.unionBy(
       [new Project({name: 'some project I will disable', disabled: true})], projects, 'name'

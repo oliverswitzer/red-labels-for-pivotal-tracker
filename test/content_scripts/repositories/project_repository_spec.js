@@ -1,9 +1,9 @@
 import ProjectRepository from '../../../src/content_scripts/repositories/project_repository.js';
 import Project from '../../../src/content_scripts/repositories/project';
-import ChromeStorageWrapper from '../../../src/content_scripts/utilities/chrome_storage_wrapper'
+import ChromeWrapper from '../../../src/content_scripts/utilities/chrome_wrapper'
 
 describe('ProjectRepository', () => {
-  let projectRepository, trackerApiClientSpy, chromeStorageWrapperSpy;
+  let projectRepository, trackerApiClientSpy, chromeWrapperSpy;
 
   beforeEach(() => {
     let remoteProjectsFromTracker = [
@@ -24,10 +24,10 @@ describe('ProjectRepository', () => {
       update: jasmine.createSpy('update')
     };
 
-    chromeStorageWrapperSpy = new ChromeStorageWrapper();
+    chromeWrapperSpy = new ChromeWrapper();
 
-    spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve([]));
-    spyOn(chromeStorageWrapperSpy, 'set').and.returnValue(Promise.resolve())
+    spyOn(chromeWrapperSpy, 'get').and.returnValue(Promise.resolve([]));
+    spyOn(chromeWrapperSpy, 'set').and.returnValue(Promise.resolve())
   });
 
   describe('findById', () => {
@@ -38,13 +38,13 @@ describe('ProjectRepository', () => {
           new Project({id: 99, name: 'Learn About Another Force', disabled: true}),
         ];
 
-        chromeStorageWrapperSpy = new ChromeStorageWrapper();
-        spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
-        spyOn(chromeStorageWrapperSpy, 'set').and.returnValue(Promise.resolve());
+        chromeWrapperSpy = new ChromeWrapper();
+        spyOn(chromeWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
+        spyOn(chromeWrapperSpy, 'set').and.returnValue(Promise.resolve());
 
         projectRepository = new ProjectRepository({
           trackerApiClient: trackerApiClientSpy,
-          chromeStorageWrapper: chromeStorageWrapperSpy
+          chromeWrapper: chromeWrapperSpy
         })
       });
 
@@ -67,7 +67,7 @@ describe('ProjectRepository', () => {
       beforeEach(() => {
         projectRepository = new ProjectRepository({
           trackerApiClient: trackerApiClientSpy,
-          chromeStorageWrapper: chromeStorageWrapperSpy
+          chromeWrapper: chromeWrapperSpy
         });
       });
 
@@ -103,7 +103,7 @@ describe('ProjectRepository', () => {
 
       it('updates chrome store with new projects', (done) => {
         projectRepository.findAll().then((foundProjects) => {
-          expect(chromeStorageWrapperSpy.set).toHaveBeenCalledWith({projects: foundProjects});
+          expect(chromeWrapperSpy.set).toHaveBeenCalledWith({projects: foundProjects});
 
           done();
         });
@@ -114,13 +114,13 @@ describe('ProjectRepository', () => {
       beforeEach(() => {
         const localProjects = [new Project({id: 98, name: 'Learn About the Force', disabled: false})];
 
-        chromeStorageWrapperSpy = new ChromeStorageWrapper();
-        spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
-        spyOn(chromeStorageWrapperSpy, 'set').and.returnValue(Promise.resolve());
+        chromeWrapperSpy = new ChromeWrapper();
+        spyOn(chromeWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
+        spyOn(chromeWrapperSpy, 'set').and.returnValue(Promise.resolve());
 
         projectRepository = new ProjectRepository({
           trackerApiClient: trackerApiClientSpy,
-          chromeStorageWrapper: chromeStorageWrapperSpy
+          chromeWrapper: chromeWrapperSpy
         })
       });
 
@@ -153,13 +153,13 @@ describe('ProjectRepository', () => {
       beforeEach(() => {
         const localProjects = [new Project({id: 98, name: 'some stale name stored in chrome', disabled: false})];
 
-        chromeStorageWrapperSpy = new ChromeStorageWrapper();
-        spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
-        spyOn(chromeStorageWrapperSpy, 'set').and.returnValue(Promise.resolve());
+        chromeWrapperSpy = new ChromeWrapper();
+        spyOn(chromeWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
+        spyOn(chromeWrapperSpy, 'set').and.returnValue(Promise.resolve());
 
         projectRepository = new ProjectRepository({
           trackerApiClient: trackerApiClientSpy,
-          chromeStorageWrapper: chromeStorageWrapperSpy
+          chromeWrapper: chromeWrapperSpy
         })
       });
 
@@ -187,13 +187,13 @@ describe('ProjectRepository', () => {
         new Project({id: 3, name: 'some other other project', disabled: true})
       ];
 
-      chromeStorageWrapperSpy = new ChromeStorageWrapper();
-      spyOn(chromeStorageWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
-      spyOn(chromeStorageWrapperSpy, 'set').and.returnValue(Promise.resolve([]));
+      chromeWrapperSpy = new ChromeWrapper();
+      spyOn(chromeWrapperSpy, 'get').and.returnValue(Promise.resolve(localProjects));
+      spyOn(chromeWrapperSpy, 'set').and.returnValue(Promise.resolve([]));
 
       projectRepository = new ProjectRepository({
         trackerApiClient: trackerApiClientSpy,
-        chromeStorageWrapper: chromeStorageWrapperSpy
+        chromeWrapper: chromeWrapperSpy
       })
     });
 
@@ -202,7 +202,7 @@ describe('ProjectRepository', () => {
       const projectToUpdate = new Project({id: 1, name: 'some project I will update', disabled: true});
 
       projectRepository.update(projectToUpdate).then(() => {
-        expect(chromeStorageWrapperSpy.set).toHaveBeenCalledWith(
+        expect(chromeWrapperSpy.set).toHaveBeenCalledWith(
           {
             projects: [
               jasmine.objectContaining({id: 1, name: 'some project I will update', disabled: true}),

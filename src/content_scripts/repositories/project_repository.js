@@ -2,9 +2,9 @@ import Project from './project.js';
 import _ from 'lodash';
 
 export default class ProjectRepository {
-  constructor({trackerApiClient, chromeStorageWrapper}) {
+  constructor({trackerApiClient, chromeWrapper}) {
     this._trackerApiClient = trackerApiClient;
-    this._chromeStorageWrapper = chromeStorageWrapper;
+    this._chromeWrapper = chromeWrapper;
 
     this.update = this.update.bind(this);
   }
@@ -22,12 +22,12 @@ export default class ProjectRepository {
   findAll() {
     return new Promise(resolve => {
       this._trackerApiClient.getAllProjects().then(projectsFromTracker => {
-        this._chromeStorageWrapper.get('projects')
+        this._chromeWrapper.get('projects')
           .then(localProjects => {
             return this._mergeLocalAndRemoteProjects(projectsFromTracker, localProjects)
           })
           .then(mergedProjects => {
-            return this._chromeStorageWrapper.set({projects: mergedProjects})
+            return this._chromeWrapper.set({projects: mergedProjects})
               .then(() => resolve(mergedProjects));
           });
       });
@@ -38,12 +38,12 @@ export default class ProjectRepository {
     return new Promise((resolve, reject) => {
       if(_.isNil(project.id)) { reject('project ID is missing') }
 
-      this._chromeStorageWrapper.get('projects')
+      this._chromeWrapper.get('projects')
         .then((savedProjects) => {
            return _.unionBy([project], savedProjects, 'name');
         })
         .then((savedAndUpdatedProjects) => {
-          this._chromeStorageWrapper.set({projects: savedAndUpdatedProjects});
+          this._chromeWrapper.set({projects: savedAndUpdatedProjects});
           resolve();
         });
     });

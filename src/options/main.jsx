@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import OnboardingSection from './components/OnboardingSection.jsx';
 import TokenInputAndToggleProjectContainer from './containers/TokenInputAndToggleProjectContainer.jsx';
-import ChromeStorageWrapper from '../content_scripts/utilities/chrome_storage_wrapper';
+import ChromeWrapper from '../content_scripts/utilities/chrome_wrapper';
 
 class Main extends React.Component {
   constructor() {
@@ -32,13 +32,13 @@ class Main extends React.Component {
           </div>
         </div>
 
-        <TokenInputAndToggleProjectContainer chromeStorageWrapper={this.props.chromeStorageWrapper}/>
+        <TokenInputAndToggleProjectContainer chromeWrapper={this.props.chromeWrapper}/>
       </div>
     )
   }
 }
 
 ReactDOM.render(
-  <Main chromeStorageWrapper={new ChromeStorageWrapper(chrome)}/>,
+  <Main chromeWrapper={new ChromeWrapper(chrome)}/>,
   document.getElementById('container')
 );
