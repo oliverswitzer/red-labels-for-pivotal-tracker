@@ -10,12 +10,12 @@ ISC License (included in the `LICENSE` file).
 ## Running the tests
 
 ```
-$ npm run test
+$ yarn test
 ```
 
 To run Karma continually:
 ```
-$ npm run karma
+$ yarn karma
 ```
 ---
 
@@ -38,7 +38,7 @@ To build a new version, you'll want to bump the `version` and `version_name` in 
 Then run:
 
 ```
-$ npm run package
+$ yarn package
 ```
 
 This runs webpack and then creates a .zip file in the dist/ directory using `scripts/package.js`. Zipped files include 
@@ -49,13 +49,13 @@ your `manifest.json`, `content_scripts`, `background.scripts`, and `options_page
 Before you load your chrome extension into the browser, make sure that you run:
 
 ```$xslt
-$ npm run weback
+$ yarn weback
 ```
 
 or to run it to continually watch/package changes:
 
 ```
-$ npm run watch
+$ yarn watch
 ```
 
 This will also continually package the extension under `dist/`
