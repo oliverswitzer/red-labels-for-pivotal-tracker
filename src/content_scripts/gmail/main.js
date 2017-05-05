@@ -2,8 +2,9 @@ import fetchWrapper from '../utilities/fetch_wrapper'
 import PivotalTrackerApiClient from '../utilities/pivotal_tracker_api_client';
 import WWLTWRepository from '../repositories/wwltw_repository';
 import MarkdownTranslator from './markdown_translator';
+import $ from 'jquery'
 
-const GMAIL_IDS = {subject: ':oq', body: ':np', nameOfEmail: ':on'};
+const GMAIL_SELECTORS = {body: '.editable', subject: ':oq', nameOfEmail: ':on'};
 
 chrome.storage.sync.get('trackerApiToken', function (options) {
     const wwltwRepository = new WWLTWRepository(
@@ -50,9 +51,9 @@ function populateEmail(values) {
     const description = values[0][0].description;
 
     let subject = `[WWLTW] ${projectName}`;
-    document.getElementById(GMAIL_IDS.subject).value = subject;
-    document.getElementById(GMAIL_IDS.nameOfEmail).innerText = subject;
-    document.getElementById(GMAIL_IDS.body).innerHTML = convertToHtml(description);
+    document.getElementById(GMAIL_SELECTORS.subject).value = subject;
+    document.getElementById(GMAIL_SELECTORS.nameOfEmail).innerText = subject;
+    $(GMAIL_SELECTORS.body).html(convertToHtml(description));
 }
 
 
