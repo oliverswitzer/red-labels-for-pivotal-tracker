@@ -17,6 +17,7 @@ export default class TokenInputAndToggleProjectContainer extends React.Component
 
     this.styles = {
       container: {
+        minHeight: '500px',
         backgroundColor: 'rgba(19, 128, 120, 0.75)',
         color: 'white',
         marginTop: '35px',
