@@ -66,7 +66,8 @@ export default class WWLTWModal {
         this.$modal = $('.ui.modal').modal({
             onHide: () => {
                 this.clearForm()
-            }
+            },
+            closable: false
         });
 
         this._preventEnteringCustomTagsFromSubmitting();
