@@ -6,3 +6,6 @@ deployment:
     branch: master
     commands:
       - 'npm run package_and_deploy'
+notify:
+  webhooks:
+    - url: https://physical-build-monitor.herokuapp.com/webhooks/circleci/receive
