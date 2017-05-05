@@ -1,30 +1,36 @@
-import $ from 'jquery';
-import AddLearningToStoryDescription from './use_cases/add_learning_to_story_description';
-import PivotalTrackerApiClient from '../utilities/pivotal_tracker_api_client';
-import WWLTWRepository from '../repositories/wwltw_repository';
-import FindOrCreateWWLTWStory from './use_cases/find_or_create_wwltw_story';
-import WWLTWModal from './view/wwltw_modal';
+import PivotalTrackerApiClient from '../utilities/pivotal_tracker_api_client'
 import fetchWrapper from '../utilities/fetch_wrapper'
-import storyListener from './view/story_listener'
-import iconListener from './view/icon_listener'
-import SetAlarm from '../utilities/alarm_creator'
+import ProjectRepository from '../repositories/project_repository'
+import ChromeWrapper from '../utilities/chrome_wrapper'
+import isProjectEnabled from './use_cases/is_project_enabled'
+import ProjectIdProvider from '../utilities/project_id_provider'
+import Application from './application'
+import notifyNewUserOfToggleFeature from './use_cases/notify_new_user_of_toggle_feature'
+import ToggleFeatureNotifier from "./view/toggle_feature_notifier";
 
-$(function () {
-    SetAlarm(chrome);
+chrome.storage.sync.get('trackerApiToken', function (options) {
+  /* UTILITIES */
+  const trackerApiClient = new PivotalTrackerApiClient(options.trackerApiToken, fetchWrapper);
+  const chromeWrapper = new ChromeWrapper(chrome);
 
-    const modalInitializer = new WWLTWModal();
-    const modal = modalInitializer.initialize();
+  /* VIEW */
+  const toggleFeatureNotifier = new ToggleFeatureNotifier({chromeWrapper});
 
+  /* REPOS */
+  const projectRepository = new ProjectRepository({
+    trackerApiClient,
+    chromeWrapper: chromeWrapper
+  });
 
-    chrome.storage.sync.get('trackerApiToken', function (options) {
-        let wwltwRepository = new WWLTWRepository(new PivotalTrackerApiClient(options.trackerApiToken, fetchWrapper));
+  notifyNewUserOfToggleFeature({projectRepository, chromeWrapper, toggleFeatureNotifier});
 
-        const addLearningToStoryDescription = new AddLearningToStoryDescription(wwltwRepository);
-        modal.bindFormSubmission(addLearningToStoryDescription.execute);
+  isProjectEnabled(projectRepository, ProjectIdProvider)
+    .then(() => Application.run(trackerApiClient))
+    .catch((error) => {
+      console.log('WWLTW extension is disabled for this project');
 
-        storyListener(modal.$modal);
-        iconListener();
-
-        FindOrCreateWWLTWStory(wwltwRepository);
-    });
+      if (error) {
+        console.error(error);
+      }
+    })
 });

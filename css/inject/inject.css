@@ -1,13 +1,18 @@
-i.icon {
-    font-family: sans-serif;
-}
 
-i.icon.close:before {
-    content: "x"
-}
-
-i.icon.delete:before {
-    content: "x"
+/* Override for Semantic-UI to be able to load Icons from a chrome extension */
+@font-face {
+    font-family: Icons;
+    src: url(chrome-extension://__MSG_@@extension_id__/icons/semantic-ui/icons.eot);
+    src: url(chrome-extension://__MSG_@@extension_id__/icons/semantic-ui/icons.eot?#iefix) format('embedded-opentype'),
+         url(chrome-extension://__MSG_@@extension_id__/icons/semantic-ui/icons.woff2) format('woff2'),
+         url(chrome-extension://__MSG_@@extension_id__/icons/semantic-ui/icons.woff) format('woff'),
+         url(chrome-extension://__MSG_@@extension_id__/icons/semantic-ui/icons.ttf) format('truetype'),
+         url(chrome-extension://__MSG_@@extension_id__/icons/semantic-ui/icons.svg#icons) format('svg');
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-transform: none
 }
 
 .ui.multiple.dropdown {
@@ -28,5 +33,15 @@ i.icon.delete:before {
 
 .meta.wwltw-story:before {
     background-size: 18px 18px !important;
-    background-image: url("chrome-extension://__MSG_@@extension_id__/icons/fatlogo.svg") !important;
+    background-image: url(chrome-extension://__MSG_@@extension_id__/icons/fatlogo.svg) !important;
+}
+
+.ui.message {
+    font-size: 12px;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.ui.message a {
+    color: rgb(19, 128, 120) !important;
 }
