@@ -13,7 +13,7 @@ export default class OnboardingSection extends React.Component {
       numberIcon: {
         fontSize: '2em',
         margin: '0 auto',
-        backgroundColor: '#138078',
+        backgroundColor: 'rgba(19, 128, 120, 0.74902)',
         color: '#FFFFFF',
         borderRadius: '50%',
         height: '100px',
