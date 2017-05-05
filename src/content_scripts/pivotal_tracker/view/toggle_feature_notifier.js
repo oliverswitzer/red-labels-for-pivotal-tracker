@@ -16,7 +16,7 @@ export default class ToggleFeatureNotifier {
            WWLTW Extension Update
         </div>
         <p>The WWLTW chrome extension is now disabled by default for all backlogs. You can enable it for any of your backlogs from 
-          the <a href="${optionsUrl}" target="_blank">bottom of the options page.</a></p>
+          the <a href="${optionsUrl}" target="_blank">bottom of the options page</a>.</p>
       </div>
     `);
 
