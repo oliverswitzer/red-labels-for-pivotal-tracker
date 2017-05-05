@@ -1,11 +1,11 @@
 test:
   override:
-    - 'npm test'
-deployment:
-  production:
-    branch: master
-    commands:
-      - 'npm run package_and_deploy'
+    - 'npm run test'
+#deployment:
+#  production:
+#    branch: master
+#    commands:
+#      - 'npm run package_and_deploy'
 notify:
   webhooks:
     - url: https://physical-build-monitor.herokuapp.com/webhooks/circleci/receive
