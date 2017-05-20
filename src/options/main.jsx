@@ -27,7 +27,7 @@ class Main extends React.Component {
           <div className="row">
             <div className="one wide column"/>
             <div className="fourteen wide column">
-              <h1 style={this.styles.mainHeader}>What We Learned This Week for Pivotal Tracker</h1>
+              <h1 data={{test: 'options-page-header'}}style={this.styles.mainHeader}>What We Learned This Week for Pivotal Tracker</h1>
               <OnboardingSection/>
             </div>
           </div>
