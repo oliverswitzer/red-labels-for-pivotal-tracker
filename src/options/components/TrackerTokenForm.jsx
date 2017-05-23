@@ -47,7 +47,7 @@ export default class TrackerTokenForm extends React.Component {
     return (
       <Segment style={this.styles.container}>
         <Form onSubmit={this.handleFormSubmit} success={this.state.tokenSaved}>
-          <Form.Input onChange={this.handleTokenChange} value={this.state.trackerApiToken} label='Tracker API Token' />
+          <Form.Input data-test='tracker-api-token' onChange={this.handleTokenChange} value={this.state.trackerApiToken} label='Tracker API Token' />
           <Message
             success
             header='Saved token successfully'
