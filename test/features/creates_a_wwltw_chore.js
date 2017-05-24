@@ -5,10 +5,6 @@ require('dotenv').config()
 
 
 describe('chrome extension is loaded properly when feature tests run', function () {
-  beforeEach(function () {
-    jasmine.getEnv().defaultTimeoutInterval = 1000000
-  })
-
   it('creates a WWLTW chore in the backlog', function () {
     browser.setValue("[data-test='tracker-api-token'] input", process.env.TEST_PIVOTAL_TRACKER_TOKEN)
     browser.click('button=Submit')
