@@ -117,7 +117,7 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/testrunner/reporters.html
-    // reporters: ['dot'],
+    // reporters: ['spec'],
     //
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
@@ -153,8 +153,26 @@ exports.config = {
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        require('dotenv').config()
+
+        debugger;
+        browser.addCommand('loginToTrackerBacklog', function() {
+          browser.setValue("[data-test='tracker-api-token'] input", process.env.TEST_PIVOTAL_TRACKER_TOKEN)
+          browser.click('button=Submit')
+          browser.pause(1000)
+          browser.click('label=Test Project')
+          browser.pause(1000)
+
+          browser.url('https://www.pivotaltracker.com/signin')
+          browser.setValue("#credentials_username", process.env.TEST_PIVOTAL_TRACKER_USERNAME)
+          browser.click("#login_type_check_form input[type='submit']")
+          browser.setValue("#credentials_password", process.env.TEST_PIVOTAL_TRACKER_PASSWORD)
+          browser.click("#login_type_check_form input[type='submit']")
+          browser.click("a=Test Project")
+          browser.pause(1000)
+        })
+    },
     //
     // Hook that gets executed before the suite starts
     // beforeSuite: function (suite) {

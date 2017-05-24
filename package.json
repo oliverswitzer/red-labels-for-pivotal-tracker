@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "karma start --single-run && extelenium -c wdio.conf.js -e dist/WWLTW-*",
+    "feature-tests": "extelenium -c wdio.conf.js -e dist/WWLTW-*",
     "package": "./scripts/update_environment_to_production.js && npm run webpack && ./scripts/package.js && ./scripts/reset_environment_to_development.js",
     "deploy": "./scripts/deploy.js",
     "package_and_deploy": "npm run package | tail -n 1 | npm run deploy",
