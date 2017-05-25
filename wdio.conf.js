@@ -14,7 +14,8 @@ exports.config = {
     ],
     // Patterns to exclude.
     exclude: [
-        // 'path/to/excluded/files'
+        './test/features/creates_a_wwltw_chore.js',
+      // './test/features/user_finishes_story_and_should_be_prompted.js'
     ],
     //
     // ============
