@@ -7,19 +7,9 @@ optional feedback on what they learned for every story that they complete.
 
 ISC License (included in the `LICENSE` file).
 
-## Running the tests
-
-```
-$ yarn test
-```
-
-To run Karma continually:
-```
-$ yarn karma
-```
 ---
 
-## Getting started
+## Development setup
 
 For first time building locally, you'll need two files: `.env` and `production.env`. 
 
@@ -27,7 +17,32 @@ The `.env` file holds the development secrets. You can reference `template.env` 
 
 **Build dependencies**:
 ```
-$ yarn install 
+$ yarn install
+```
+
+You will need selenium standalone to run feature tests
+
+```
+$ yarn global add selenium-standalone
+```
+
+
+## Running the tests
+
+In a separate terminal, start a selenium server for the feature tests to use:
+
+```
+$ selenium-standalone start
+```
+
+```
+$ yarn test
+```
+
+or to run only feature tests
+ 
+```
+$ yarn feature-tests
 ```
 
 ---
