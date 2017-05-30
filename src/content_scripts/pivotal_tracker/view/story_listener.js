@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import ProjectIdProvider from '../../utilities/project_id_provider'
 import DomObserver from './dom_observer'
+import SharedConstants from '../../shared_constants'
 
 export default (modal) => {
   new DomObserver().onElementMutation(() => {
@@ -37,8 +38,8 @@ function openGmail(storyTitle) {
     fs: 1,
     tf: 1,
     to: 'wwltw@pivotal.io',
-    su: 'loading...',
-    body: 'loading...'
+    su: SharedConstants.GMAIL_SUBJECT_LOADING_TEXT,
+    body: SharedConstants.GMAIL_BODY_LOADING_TEXT
   }
 
   Object.keys(params).forEach(function (paramKey) {
