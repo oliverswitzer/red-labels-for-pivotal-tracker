@@ -7,7 +7,7 @@ import SharedConstants from '../shared_constants'
 
 const GMAIL_SELECTORS = {
   body: `:contains(${SharedConstants.GMAIL_BODY_LOADING_TEXT})`,
-  subject: `:oq`,
+  subject: `[aria-label="Subject"]`,
   nameOfEmail: ':on'
 }
 
@@ -49,7 +49,7 @@ function populateEmail(values) {
 
   let subject = `[WWLTW] ${projectName}`
 
-  document.getElementById(GMAIL_SELECTORS.subject).value = subject
+  document.querySelector(GMAIL_SELECTORS.subject).value = subject
   document.getElementById(GMAIL_SELECTORS.nameOfEmail).innerText = subject
 
   const $body = getElementDirectlyContainingText(SharedConstants.GMAIL_BODY_LOADING_TEXT)
